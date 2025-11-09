@@ -124,7 +124,7 @@ export default async function DashboardPage() {
         <div className="bg-white rounded-xl border border-gray-200">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-900">Recent Projects</h2>
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="outline" size="small" asChild>
               <Link href="/dashboard/projects">View All</Link>
             </Button>
           </div>
