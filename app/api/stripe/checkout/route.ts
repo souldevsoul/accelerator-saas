@@ -3,6 +3,10 @@ import { requireUser } from '@/lib/supabase/server'
 import { createCheckoutSession, type CreditPackageKey } from 'lib'
 import { prisma } from 'db'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+
 /**
  * POST /api/stripe/checkout
  * Create a Stripe checkout session for credits purchase

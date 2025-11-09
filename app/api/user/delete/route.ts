@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { prisma } from 'db'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+
 export async function DELETE(request: NextRequest) {
   try {
     const supabase = await createClient()

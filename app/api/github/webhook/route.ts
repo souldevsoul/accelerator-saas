@@ -3,6 +3,10 @@ import { verifyWebhookSignature } from 'lib'
 import { refundCredits } from 'lib'
 import { prisma } from 'db'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+
 /**
  * POST /api/github/webhook
  * Handle GitHub webhook events

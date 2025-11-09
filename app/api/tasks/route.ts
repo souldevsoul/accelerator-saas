@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma, calculateTaskCost } from 'db'
 import { requireUser } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+
 /**
  * POST /api/tasks
  * Create a new task
