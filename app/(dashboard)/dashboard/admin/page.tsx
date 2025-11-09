@@ -90,7 +90,7 @@ export default async function AdminDashboardPage() {
     },
     {
       title: 'Credits in System',
-      value: totalCreditsInSystem._sum.balance || 0,
+      value: Number(totalCreditsInSystem._sum.balance || 0),
       icon: DollarSign,
       color: 'green',
     },
