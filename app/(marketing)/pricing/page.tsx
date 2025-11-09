@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import PageContainer from '@/components/layout/page-container';
-import Button from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Check, Sparkles } from 'lucide-react'
 
 export default function PricingPage() {
