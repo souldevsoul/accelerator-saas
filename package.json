@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "cd packages/db && pnpm run generate && cd ../.. && mkdir -p prisma && cp packages/db/schema.prisma prisma/schema.prisma && next build",
+    "build": "pnpm --filter db run generate && mkdir -p prisma && cp packages/db/schema.prisma prisma/schema.prisma && next build",
     "start": "next start",
     "lint": "next lint"
   },
