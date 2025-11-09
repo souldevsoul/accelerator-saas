@@ -1,6 +1,6 @@
 import { requireUser } from '@/lib/supabase/server'
 import { prisma } from 'db'
-import { redirect } from 'next/redirect'
+import { redirect } from 'next/navigation'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -43,7 +43,17 @@ export default async function DashboardPage() {
       },
       include: {
         wallet: true,
-        projects: true,
+        projects: {
+          include: {
+            tasks: true,
+            aiRuns: {
+              take: 1,
+              orderBy: { createdAt: 'desc' },
+            },
+          },
+          orderBy: { createdAt: 'desc' },
+          take: 5,
+        },
       },
     })
   }
