@@ -59,7 +59,7 @@ export default async function AdminDashboardPage() {
       take: 5,
       orderBy: { createdAt: 'desc' },
       include: {
-        user: {
+        owner: {
           select: {
             email: true,
             name: true,
@@ -124,8 +124,8 @@ export default async function AdminDashboardPage() {
             items={recentProjects.map((p) => ({
               id: p.id,
               primary: p.name,
-              secondary: `by ${p.user.name || p.user.email}`,
-              badge: p.githubRepo,
+              secondary: `by ${p.owner.name || p.owner.email}`,
+              badge: p.repoFullName,
               time: p.createdAt,
             }))}
           />
