@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import FormField from '@/components/ui/form-field'
 import PasswordInput from '@/components/ui/password-input'
-import { createClient } from '@/lib/supabase/client'
-import { Github, Mail } from 'lucide-react'
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/client'
+import { Github, Mail, AlertCircle } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -18,6 +18,65 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
   const [message, setMessage] = useState<{type: 'error' | 'success', text: string} | null>(null)
+
+  // Check if Supabase is configured
+  if (!isSupabaseConfigured()) {
+    return (
+      <div className="antialiased bg-body text-body font-body min-h-screen">
+        <section className="relative py-12 md:py-24 overflow-hidden min-h-screen flex items-center">
+          <div className="absolute bottom-0 left-0 w-full pointer-events-none">
+            <div className="h-64 bg-gradient-to-t from-teal-50 to-transparent"></div>
+          </div>
+
+          <div className="relative container px-4 mx-auto w-full">
+            <div className="max-w-md mx-auto">
+              <div className="text-center mb-8">
+                <Link className="inline-flex items-center gap-2.5 mb-8 group" href="/">
+                  <div className="w-10 h-10 bg-gradient-to-br from-cyanGreen-800 to-cyan-800 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
+                    <span className="text-white font-bold text-xl">A</span>
+                  </div>
+                  <span className="text-2xl font-semibold text-gray-800">Accelerator</span>
+                </Link>
+              </div>
+
+              <div className="p-8 bg-white border border-gray-200 rounded-2xl shadow-lg">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="flex-shrink-0">
+                    <AlertCircle className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-800 mb-2">Beta Mode</h2>
+                    <p className="text-gray-600 mb-4">
+                      We're currently in beta mode. Authentication is not available yet.
+                    </p>
+                    <p className="text-gray-600 mb-4">
+                      To get early access and start building your MVP, please contact our team:
+                    </p>
+                    <a
+                      href="mailto:support@accelerator.dev"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors font-medium"
+                    >
+                      <Mail className="w-4 h-4" />
+                      Contact Support
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <Link
+                    href="/"
+                    className="text-sm text-teal-600 hover:text-teal-700 font-medium hover:underline"
+                  >
+                    ← Back to Home
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    )
+  }
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault()
