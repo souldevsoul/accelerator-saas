@@ -84,49 +84,49 @@
   --color-yellowGreen-800: #70A617;
   --color-yellowGreen-900: #588212;
 
-  --color-teal-50: #F9FBF9;
-  --color-teal-100: #F2F8F4;
-  --color-teal-200: #DEEDE3;
-  --color-teal-300: #C4DECC;
-  --color-teal-400: #A3CCAF;
-  --color-teal-500: #7CB68D;
-  --color-teal-600: #579E6C;
-  --color-teal-700: #417751;
-  --color-teal-800: #2B4F36;
-  --color-teal-900: #073517;
+  --color-teal-50: #f0f9ff;
+  --color-teal-100: #e0f2fe;
+  --color-teal-200: #bae6fd;
+  --color-teal-300: #7dd3fc;
+  --color-teal-400: #38bdf8;
+  --color-teal-500: #0ea5e9;
+  --color-teal-600: #0284c7;
+  --color-teal-700: #0369a1;
+  --color-teal-800: #075985;
+  --color-teal-900: #0c4a6e;
 
-  --color-green-50: #FBFEFC;
-  --color-green-100: #F4FDF7;
-  --color-green-200: #EAFAF0;
-  --color-green-300: #CAF4D9;
-  --color-green-400: #AAEDC3;
-  --color-green-500: #6ADF95;
-  --color-green-600: #2AD168;
-  --color-green-700: #26BC5E;
-  --color-green-800: #209D4E;
-  --color-green-900: #197D3E;
+  --color-green-50: #f0f9ff;
+  --color-green-100: #e0f2fe;
+  --color-green-200: #bae6fd;
+  --color-green-300: #7dd3fc;
+  --color-green-400: #38bdf8;
+  --color-green-500: #0ea5e9;
+  --color-green-600: #0284c7;
+  --color-green-700: #0369a1;
+  --color-green-800: #075985;
+  --color-green-900: #0c4a6e;
 
-  --color-cyan-50: #e9f6f5;
-  --color-cyan-100: #bde6e2;
-  --color-cyan-200: #a7ddd9;
-  --color-cyan-300: #92d5cf;
-  --color-cyan-400: #7ccdc6;
-  --color-cyan-500: #66c4bc;
-  --color-cyan-600: #50bcb3;
-  --color-cyan-700: #3ab4a9;
-  --color-cyan-800: #25aca0;
-  --color-cyan-900: #1d8980;
+  --color-cyan-50: #f0f9ff;
+  --color-cyan-100: #e0f2fe;
+  --color-cyan-200: #bae6fd;
+  --color-cyan-300: #7dd3fc;
+  --color-cyan-400: #38bdf8;
+  --color-cyan-500: #0ea5e9;
+  --color-cyan-600: #0284c7;
+  --color-cyan-700: #0369a1;
+  --color-cyan-800: #075985;
+  --color-cyan-900: #0c4a6e;
 
-  --color-cyanGreen-50: #eef9da;
-  --color-cyanGreen-100: #e6f6c8;
-  --color-cyanGreen-200: #ddf3b5;
-  --color-cyanGreen-300: #d5f1a3;
-  --color-cyanGreen-400: #cdee91;
-  --color-cyanGreen-500: #c4eb7e;
-  --color-cyanGreen-600: #bce86c;
-  --color-cyanGreen-700: #b4e55a;
-  --color-cyanGreen-800: #ace348;
-  --color-cyanGreen-900: #9acc40;
+  --color-cyanGreen-50: #f0f9ff;
+  --color-cyanGreen-100: #e0f2fe;
+  --color-cyanGreen-200: #bae6fd;
+  --color-cyanGreen-300: #7dd3fc;
+  --color-cyanGreen-400: #38bdf8;
+  --color-cyanGreen-500: #0ea5e9;
+  --color-cyanGreen-600: #0284c7;
+  --color-cyanGreen-700: #0369a1;
+  --color-cyanGreen-800: #075985;
+  --color-cyanGreen-900: #0c4a6e;
 
   --color-red-50: #FEFBFB;
   --color-red-100: #FDF3F1;
@@ -181,7 +181,7 @@
 
 :root {
   /* Background image for radial gradient */
-  --bg-gradient-radial-dark-green: radial-gradient(446.50% 301.92% at 50.09% 3.49%, #052410 13.21%, #75A274 27.92%, #A0CAAC 34.17%);
+  --bg-gradient-radial-dark-green: radial-gradient(446.50% 301.92% at 50.09% 3.49%, #0c4a6e 13.21%, #0284c7 27.92%, #38bdf8 34.17%);
 }
 
 /* Custom breakpoint - xs */
@@ -244,10 +244,10 @@
 }
 
 @keyframes pulseTextGreen {
-  0% { color: #2B4F36; }
+  0% { color: #075985; }
   25% { color: #FFF; }
   70% { color: #FFF; }
-  100% { color: #2B4F36; }
+  100% { color: #075985; }
 }
 
 @keyframes showLine {
