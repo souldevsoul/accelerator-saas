@@ -121,7 +121,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
           {iconElement}
         </span>
       )}
-    </button>
+    </Comp>
   );
 });
 
