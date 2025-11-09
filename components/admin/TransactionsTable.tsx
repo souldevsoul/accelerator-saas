@@ -23,7 +23,7 @@ export function TransactionsTable({ transactions }: { transactions: TransactionW
     )
   })
 
-  const getTransactionColor = (delta: number) => {
+  const getTransactionColor = (delta: number | bigint) => {
     return delta > 0 ? 'text-green-600' : 'text-red-600'
   }
 
@@ -67,14 +67,13 @@ export function TransactionsTable({ transactions }: { transactions: TransactionW
               <th className="text-left py-4 px-6 text-sm font-semibold text-gray-900">User</th>
               <th className="text-left py-4 px-6 text-sm font-semibold text-gray-900">Reason</th>
               <th className="text-right py-4 px-6 text-sm font-semibold text-gray-900">Amount</th>
-              <th className="text-right py-4 px-6 text-sm font-semibold text-gray-900">Balance After</th>
               <th className="text-right py-4 px-6 text-sm font-semibold text-gray-900">Time</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {filteredTransactions.length === 0 ? (
               <tr>
-                <td colSpan={5} className="py-12 text-center text-gray-500">
+                <td colSpan={4} className="py-12 text-center text-gray-500">
                   No transactions found
                 </td>
               </tr>
@@ -112,12 +111,9 @@ export function TransactionsTable({ transactions }: { transactions: TransactionW
                       )}
                       <span className={`text-sm font-semibold ${getTransactionColor(transaction.delta)}`}>
                         {transaction.delta > 0 ? '+' : ''}
-                        {transaction.delta}
+                        {Number(transaction.delta)}
                       </span>
                     </div>
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <span className="text-sm font-medium text-gray-900">{transaction.balanceAfter}</span>
                   </td>
                   <td className="py-4 px-6 text-right">
                     <span className="text-sm text-gray-600">

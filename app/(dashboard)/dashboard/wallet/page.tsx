@@ -37,11 +37,11 @@ export default async function WalletPage() {
   // Calculate stats
   const totalEarned = transactions
     .filter((t) => t.delta > 0)
-    .reduce((sum, t) => sum + t.delta, 0)
+    .reduce((sum, t) => sum + Number(t.delta), 0)
 
   const totalSpent = transactions
     .filter((t) => t.delta < 0)
-    .reduce((sum, t) => sum + Math.abs(t.delta), 0)
+    .reduce((sum, t) => sum + Math.abs(Number(t.delta)), 0)
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
@@ -65,7 +65,7 @@ export default async function WalletPage() {
             </div>
             <div className="space-y-1">
               <p className="text-sm font-medium opacity-90">Current Balance</p>
-              <p className="text-4xl font-bold">{dbUser.wallet.balance}</p>
+              <p className="text-4xl font-bold">{Number(dbUser.wallet.balance)}</p>
               <p className="text-xs opacity-75">credits</p>
             </div>
           </div>

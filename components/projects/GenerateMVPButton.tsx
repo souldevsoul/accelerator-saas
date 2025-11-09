@@ -46,7 +46,7 @@ export function GenerateMVPButton({ projectId }: { projectId: string }) {
     <>
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button size="lg" disabled={isGenerating}>
+          <Button size="large" disabled={isGenerating}>
             {isGenerating ? (
               <>
                 <Loader2 className="w-5 h-5 mr-2 animate-spin" />

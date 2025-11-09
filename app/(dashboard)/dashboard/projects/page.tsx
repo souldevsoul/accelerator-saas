@@ -55,7 +55,7 @@ export default async function ProjectsPage() {
             <p className="text-gray-600 mb-6">
               Create your first project and generate an MVP to get started
             </p>
-            <Button asChild size="lg">
+            <Button asChild size="large">
               <Link href="/dashboard/projects/new">
                 <Plus className="w-5 h-5 mr-2" />
                 Create Your First Project

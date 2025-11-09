@@ -221,14 +221,16 @@ export default function HowItWorksPage() {
               Join hundreds of founders shipping faster
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild className="text-lg px-8 h-14">
-                <Link href="/login">
+              <Link href="/login">
+                <Button size="large" className="text-lg px-8 h-14 flex items-center">
                   Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="text-lg px-8 h-14">
-                <Link href="/pricing">View Pricing</Link>
-              </Button>
+                </Button>
+              </Link>
+              <Link href="/pricing">
+                <Button size="large" variant="outline" className="text-lg px-8 h-14">
+                  View Pricing
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

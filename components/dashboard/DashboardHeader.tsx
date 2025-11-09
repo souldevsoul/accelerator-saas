@@ -45,7 +45,7 @@ export function DashboardHeader({ title, description, balance, action }: Dashboa
 
           {/* Action Button */}
           {action && (
-            <Button asChild size="lg">
+            <Button asChild size="large">
               <Link href={action.href}>
                 {action.icon}
                 {action.label}

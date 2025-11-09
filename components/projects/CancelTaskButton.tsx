@@ -44,7 +44,7 @@ export function CancelTaskButton({ taskId }: { taskId: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="sm" variant="outline" disabled={isLoading}>
+        <Button size="small" variant="outline" disabled={isLoading}>
           {isLoading ? (
             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
           ) : (

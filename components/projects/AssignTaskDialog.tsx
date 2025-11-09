@@ -77,7 +77,7 @@ export function AssignTaskDialog({ taskId, estimatedCost }: { taskId: string; es
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" variant="outline">
+        <Button size="small" variant="outline">
           <UserPlus className="w-4 h-4 mr-2" />
           Assign
         </Button>

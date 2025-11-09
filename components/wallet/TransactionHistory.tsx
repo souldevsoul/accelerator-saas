@@ -13,7 +13,7 @@ export function TransactionHistory({ transactions }: { transactions: CreditLedge
     )
   }
 
-  const getTransactionIcon = (reason: string, delta: number) => {
+  const getTransactionIcon = (reason: string, delta: number | bigint) => {
     if (reason.includes('purchase') || reason.includes('grant')) {
       return <ArrowUpCircle className="w-5 h-5 text-green-600" />
     }
@@ -36,7 +36,7 @@ export function TransactionHistory({ transactions }: { transactions: CreditLedge
     )
   }
 
-  const getTransactionColor = (delta: number) => {
+  const getTransactionColor = (delta: number | bigint) => {
     return delta > 0 ? 'text-green-600' : 'text-red-600'
   }
 
@@ -65,7 +65,6 @@ export function TransactionHistory({ transactions }: { transactions: CreditLedge
               <th className="text-left py-4 px-6 text-sm font-semibold text-gray-900">Type</th>
               <th className="text-left py-4 px-6 text-sm font-semibold text-gray-900">Description</th>
               <th className="text-right py-4 px-6 text-sm font-semibold text-gray-900">Amount</th>
-              <th className="text-right py-4 px-6 text-sm font-semibold text-gray-900">Balance</th>
               <th className="text-right py-4 px-6 text-sm font-semibold text-gray-900">Time</th>
             </tr>
           </thead>
@@ -89,11 +88,8 @@ export function TransactionHistory({ transactions }: { transactions: CreditLedge
                 <td className="py-4 px-6 text-right">
                   <span className={`text-sm font-semibold ${getTransactionColor(transaction.delta)}`}>
                     {transaction.delta > 0 ? '+' : ''}
-                    {transaction.delta}
+                    {Number(transaction.delta)}
                   </span>
-                </td>
-                <td className="py-4 px-6 text-right">
-                  <span className="text-sm font-medium text-gray-900">{transaction.balanceAfter}</span>
                 </td>
                 <td className="py-4 px-6 text-right">
                   <span className="text-sm text-gray-600">

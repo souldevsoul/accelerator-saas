@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
   size?: 'small' | 'default' | 'large';
   children: React.ReactNode;
   disabled?: boolean;
@@ -51,7 +51,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     primary: 'text-white bg-gradient-to-br from-cyanGreen-800 to-cyan-800 hover:from-cyanGreen-900 hover:to-cyan-900 focus:ring-cyanGreen-500 rounded-lg',
     secondary: 'text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 hover:border-yellowGreen-600 focus:ring-yellowGreen-500 shadow-sm hover:shadow-none rounded-lg',
     outline: 'text-yellowGreen-700 bg-transparent border border-yellowGreen-600 hover:bg-yellowGreen-50 focus:ring-yellowGreen-500 rounded-lg',
-    ghost: 'text-gray-700 bg-transparent hover:bg-gray-100 focus:ring-gray-500 rounded-lg'
+    ghost: 'text-gray-700 bg-transparent hover:bg-gray-100 focus:ring-gray-500 rounded-lg',
+    destructive: 'text-white bg-red-600 hover:bg-red-700 focus:ring-red-500 rounded-lg'
   };
 
   // Width classes
