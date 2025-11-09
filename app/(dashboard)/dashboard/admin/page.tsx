@@ -74,25 +74,25 @@ export default async function AdminDashboardPage() {
       title: 'Total Users',
       value: totalUsers,
       icon: Users,
-      color: 'violet',
+      color: 'violet' as const,
     },
     {
       title: 'Total Projects',
       value: totalProjects,
       icon: FolderKanban,
-      color: 'blue',
+      color: 'blue' as const,
     },
     {
       title: 'Total Tasks',
       value: totalTasks,
       icon: Zap,
-      color: 'indigo',
+      color: 'indigo' as const,
     },
     {
       title: 'Credits in System',
       value: Number(totalCreditsInSystem._sum.balance || 0),
       icon: DollarSign,
-      color: 'green',
+      color: 'green' as const,
     },
   ]
 
