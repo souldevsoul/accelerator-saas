@@ -6,7 +6,8 @@
     "push": "prisma db push",
     "seed": "tsx seed.ts",
     "studio": "prisma studio",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.4.2"
