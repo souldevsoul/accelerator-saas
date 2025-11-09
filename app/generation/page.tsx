@@ -1250,23 +1250,23 @@ Tip: I automatically detect and install npm packages from your code imports (lik
             {generationProgress.isGenerating && (generationProgress.isThinking || generationProgress.thinkingText) && (
               <div className="px-6 pb-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="text-purple-600 font-medium flex items-center gap-2">
+                  <div className="text-sky-600 font-medium flex items-center gap-2">
                     {generationProgress.isThinking ? (
                       <>
-                        <div className="w-3 h-3 bg-purple-600 rounded-full animate-pulse" />
+                        <div className="w-3 h-3 bg-sky-600 rounded-full animate-pulse" />
                         AI is thinking...
                       </>
                     ) : (
                       <>
-                        <span className="text-purple-600">✓</span>
+                        <span className="text-sky-600">✓</span>
                         Thought for {generationProgress.thinkingDuration || 0} seconds
                       </>
                     )}
                   </div>
                 </div>
                 {generationProgress.thinkingText && (
-                  <div className="bg-purple-950 border border-purple-700 rounded-lg p-4 max-h-48 overflow-y-auto scrollbar-hide">
-                    <pre className="text-xs font-mono text-purple-300 whitespace-pre-wrap">
+                  <div className="bg-blue-950 border border-sky-700 rounded-lg p-4 max-h-48 overflow-y-auto scrollbar-hide">
+                    <pre className="text-xs font-mono text-sky-300 whitespace-pre-wrap">
                       {generationProgress.thinkingText}
                     </pre>
                   </div>

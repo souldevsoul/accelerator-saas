@@ -84,10 +84,10 @@ export default function BlogPage() {
         <div className="container px-4 mx-auto max-w-6xl">
           <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-200">
             <div className="grid md:grid-cols-2 gap-0">
-              <div className="aspect-[4/3] bg-gradient-to-br from-purple-800 to-purple-900"></div>
+              <div className="aspect-[4/3] bg-gradient-to-br from-sky-600 to-blue-700"></div>
               <div className="p-8 md:p-12 flex flex-col justify-center">
                 <div className="inline-flex items-center gap-2 mb-4">
-                  <span className="px-3 py-1 bg-purple-600 text-white text-sm font-semibold rounded-full">
+                  <span className="px-3 py-1 bg-sky-600 text-white text-sm font-semibold rounded-full">
                     Featured
                   </span>
                   <span className="text-gray-500 text-sm">
@@ -131,14 +131,14 @@ export default function BlogPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.slice(1).map((post, index) => (
               <article key={index} className="bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-xl transition-shadow overflow-hidden group">
-                <div className="aspect-[16/9] bg-gradient-to-br from-purple-800 to-purple-900 group-hover:scale-105 transition-transform"></div>
+                <div className="aspect-[16/9] bg-gradient-to-br from-sky-600 to-blue-700 group-hover:scale-105 transition-transform"></div>
                 <div className="p-6">
                   <div className="mb-3">
-                    <span className="text-sm font-semibold text-purple-600">
+                    <span className="text-sm font-semibold text-sky-600">
                       {post.category}
                     </span>
                   </div>
-                  <h3 className="font-heading text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                  <h3 className="font-heading text-xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
                     {post.title}
                   </h3>
                   <p className="text-gray-600 mb-4 line-clamp-3">
@@ -154,7 +154,7 @@ export default function BlogPage() {
                       <span>{post.readTime}</span>
                     </div>
                   </div>
-                  <Link href={`/blog/${post.slug}`} className="text-purple-600 font-semibold hover:underline inline-flex items-center gap-2">
+                  <Link href={`/blog/${post.slug}`} className="text-sky-600 font-semibold hover:underline inline-flex items-center gap-2">
                     Read Article
                     <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -168,7 +168,7 @@ export default function BlogPage() {
       {/* Newsletter */}
       <section className="bg-gray-50 py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-800 to-purple-900 rounded-3xl p-12 md:p-16 text-center">
+          <div className="max-w-4xl mx-auto bg-gradient-to-br from-sky-600 to-blue-700 rounded-3xl p-12 md:p-16 text-center">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
               Stay updated
             </h2>

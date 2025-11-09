@@ -49,7 +49,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-purple-800 to-purple-900 rounded-3xl"></div>
+              <div className="aspect-square bg-gradient-to-br from-sky-600 to-blue-700 rounded-3xl"></div>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default function AboutPage() {
               }
             ].map((value, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-sky-600 to-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <value.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
@@ -110,7 +110,7 @@ export default function AboutPage() {
               { number: '5,000+', label: 'Happy Developers' }
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-purple-800 to-purple-900 bg-clip-text text-transparent mb-4">
+                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-sky-600 to-blue-700 bg-clip-text text-transparent mb-4">
                   {stat.number}
                 </div>
                 <div className="text-xl text-gray-600">
@@ -125,7 +125,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="bg-white py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-800 to-purple-900 rounded-3xl p-12 md:p-16 text-center">
+          <div className="max-w-4xl mx-auto bg-gradient-to-br from-sky-600 to-blue-700 rounded-3xl p-12 md:p-16 text-center">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-8">
               Join us on our mission
             </h2>

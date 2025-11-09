@@ -236,7 +236,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   return (
     <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
       <div className="text-center max-w-2xl">
-        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-sky-600 bg-clip-text text-transparent">
           Sandbox Ready
         </h1>
         <p className="text-lg text-gray-400">

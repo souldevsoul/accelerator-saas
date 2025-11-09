@@ -81,7 +81,7 @@ function Footer() {
               <div className="flex flex-wrap items-center -mx-4">
                 <div className="w-full lg:w-1/3 px-4">
                   <div className="inline-flex items-center gap-2.5">
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center">
                       <span className="text-white font-bold text-xl">V</span>
                     </div>
                     <span className="text-2xl font-semibold text-gray-800">Velocity</span>

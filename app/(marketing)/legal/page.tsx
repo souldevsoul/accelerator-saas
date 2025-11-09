@@ -56,10 +56,10 @@ export default function LegalPage() {
                 href={item.link}
                 className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-shadow group"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 bg-gradient-to-br from-sky-600 to-blue-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <item.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -109,19 +109,19 @@ export default function LegalPage() {
               <div className="space-y-4 text-gray-600">
                 <div>
                   <strong className="text-gray-900">Email:</strong>{' '}
-                  <a href="mailto:legal@velocitydev.com" className="text-purple-600 hover:underline">
+                  <a href="mailto:legal@velocitydev.com" className="text-sky-600 hover:underline">
                     legal@velocitydev.com
                   </a>
                 </div>
                 <div>
                   <strong className="text-gray-900">Data Protection Officer:</strong>{' '}
-                  <a href="mailto:dpo@velocitydev.com" className="text-purple-600 hover:underline">
+                  <a href="mailto:dpo@velocitydev.com" className="text-sky-600 hover:underline">
                     dpo@velocitydev.com
                   </a>
                 </div>
                 <div>
                   <strong className="text-gray-900">Security Issues:</strong>{' '}
-                  <a href="mailto:security@velocitydev.com" className="text-purple-600 hover:underline">
+                  <a href="mailto:security@velocitydev.com" className="text-sky-600 hover:underline">
                     security@velocitydev.com
                   </a>
                 </div>

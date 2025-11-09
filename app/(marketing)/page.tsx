@@ -132,7 +132,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
             <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center mb-6">
                 <Zap className="h-6 w-6 text-white" />
               </div>
               <h3 className="font-heading text-2xl font-bold text-gray-900 mb-4">AI MVP Generation</h3>
@@ -232,7 +232,7 @@ export default function HomePage() {
 
             {/* Feature 5 */}
             <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 p-8 hover:shadow-xl transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-700 to-purple-900 rounded-lg flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center mb-6">
                 <Shield className="h-6 w-6 text-white" />
               </div>
               <h3 className="font-heading text-2xl font-bold text-gray-900 mb-4">Enterprise Security</h3>
@@ -299,7 +299,7 @@ export default function HomePage() {
           {/* Steps */}
           <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
             <div className="text-center relative">
-              <div className="w-20 h-20 bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+              <div className="w-20 h-20 bg-gradient-to-br from-sky-600 to-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <span className="text-white text-3xl font-bold">1</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Describe Your Idea</h3>
@@ -391,7 +391,7 @@ export default function HomePage() {
                 "The code quality is exceptional. Clean, modern, and follows best practices. Our team was impressed."
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-semibold">
+                <div className="w-12 h-12 bg-gradient-to-br from-sky-600 to-pink-600 rounded-full flex items-center justify-center text-white font-semibold">
                   SM
                 </div>
                 <div>
@@ -468,7 +468,7 @@ export default function HomePage() {
       {/* Final CTA Section */}
       <section className="bg-white py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-800 via-teal-700 to-purple-900 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
+          <div className="max-w-4xl mx-auto bg-gradient-to-br from-sky-600 via-teal-700 to-blue-700 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
               <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>

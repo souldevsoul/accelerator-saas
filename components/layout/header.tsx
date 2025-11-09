@@ -62,7 +62,7 @@ const Header = memo(() => {
           <div className="relative flex h-24 items-center">
             {/* Logo */}
             <Link className="inline-flex items-center gap-2.5 group" href={getRouteByName('home')} aria-label="Velocity - Home">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
+              <div className="w-10 h-10 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
                 <span className="text-white font-bold text-xl">V</span>
               </div>
               <span className="text-2xl font-semibold text-gray-800">Velocity</span>
@@ -70,7 +70,7 @@ const Header = memo(() => {
 
             {/* Mobile menu button */}
             <button
-              className="lg:hidden flex items-center justify-center h-10 w-10 ml-auto bg-gradient-to-b from-purple-800 to-purple-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+              className="lg:hidden flex items-center justify-center h-10 w-10 ml-auto bg-gradient-to-b from-sky-600 to-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-600 focus:ring-offset-2"
               onClick={toggleMobileMenu}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
@@ -147,7 +147,7 @@ const Header = memo(() => {
                 onClick={closeMobileMenu}
                 aria-label="Velocity - Home"
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-xl">V</span>
                 </div>
                 <span className="text-2xl font-semibold text-gray-800">Velocity</span>
