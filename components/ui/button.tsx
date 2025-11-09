@@ -1,52 +1,125 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+'use client';
 
-import { cn } from "@/lib/utils"
+import { forwardRef } from 'react';
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-[10px] text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default: "bg-zinc-900 text-white hover:bg-zinc-800 [box-shadow:inset_0px_-2px_0px_0px_#18181b,_0px_1px_6px_0px_rgba(24,_24,_27,_58%)] hover:translate-y-[1px] hover:scale-[0.98] hover:[box-shadow:inset_0px_-1px_0px_0px_#18181b,_0px_1px_3px_0px_rgba(24,_24,_27,_40%)] active:translate-y-[2px] active:scale-[0.97] active:[box-shadow:inset_0px_1px_1px_0px_#18181b,_0px_1px_2px_0px_rgba(24,_24,_27,_30%)] disabled:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100",
-        secondary: "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 [box-shadow:inset_0px_-2px_0px_0px_#d4d4d8,_0px_1px_6px_0px_rgba(161,_161,_170,_58%)] hover:translate-y-[1px] hover:scale-[0.98] hover:[box-shadow:inset_0px_-1px_0px_0px_#d4d4d8,_0px_1px_3px_0px_rgba(161,_161,_170,_40%)] active:translate-y-[2px] active:scale-[0.97] active:[box-shadow:inset_0px_1px_1px_0px_#d4d4d8,_0px_1px_2px_0px_rgba(161,_161,_170,_30%)] disabled:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100",
-        outline: "border border-zinc-300 bg-transparent hover:bg-zinc-50 text-zinc-900 [box-shadow:inset_0px_-2px_0px_0px_#e4e4e7,_0px_1px_6px_0px_rgba(228,_228,_231,_58%)] hover:translate-y-[1px] hover:scale-[0.98] hover:[box-shadow:inset_0px_-1px_0px_0px_#e4e4e7,_0px_1px_3px_0px_rgba(228,_228,_231,_40%)] active:translate-y-[2px] active:scale-[0.97] active:[box-shadow:inset_0px_1px_1px_0px_#e4e4e7,_0px_1px_2px_0px_rgba(228,_228,_231,_30%)] disabled:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100",
-        destructive: "bg-red-500 text-white hover:bg-red-600 [box-shadow:inset_0px_-2px_0px_0px_#dc2626,_0px_1px_6px_0px_rgba(239,_68,_68,_58%)] hover:translate-y-[1px] hover:scale-[0.98] hover:[box-shadow:inset_0px_-1px_0px_0px_#dc2626,_0px_1px_3px_0px_rgba(239,_68,_68,_40%)] active:translate-y-[2px] active:scale-[0.97] active:[box-shadow:inset_0px_1px_1px_0px_#dc2626,_0px_1px_2px_0px_rgba(239,_68,_68,_30%)] disabled:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100",
-        code: "bg-[#36322F] text-white hover:bg-[#4a4542] [box-shadow:inset_0px_-2px_0px_0px_#171310,_0px_1px_6px_0px_rgba(58,_33,_8,_58%)] hover:translate-y-[1px] hover:scale-[0.98] hover:[box-shadow:inset_0px_-1px_0px_0px_#171310,_0px_1px_3px_0px_rgba(58,_33,_8,_40%)] active:translate-y-[2px] active:scale-[0.97] active:[box-shadow:inset_0px_1px_1px_0px_#171310,_0px_1px_2px_0px_rgba(58,_33,_8,_30%)] disabled:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100",
-        orange: "bg-orange-500 text-white hover:bg-orange-600 [box-shadow:inset_0px_-2px_0px_0px_#c2410c,_0px_1px_6px_0px_rgba(234,_88,_12,_58%)] hover:translate-y-[1px] hover:scale-[0.98] hover:[box-shadow:inset_0px_-1px_0px_0px_#c2410c,_0px_1px_3px_0px_rgba(234,_88,_12,_40%)] active:translate-y-[2px] active:scale-[0.97] active:[box-shadow:inset_0px_1px_1px_0px_#c2410c,_0px_1px_2px_0px_rgba(234,_88,_12,_30%)] disabled:shadow-none disabled:hover:translate-y-0 disabled:hover:scale-100",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-8 px-3 py-1 text-sm",
-        lg: "h-12 px-6 py-3",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'small' | 'default' | 'large';
+  children: React.ReactNode;
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
+  className?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: 'button' | 'submit' | 'reset';
+  icon?: React.ReactElement;
+  iconPosition?: 'left' | 'right';
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? "button" : "button"
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Button.displayName = "Button"
+/**
+ * Reusable Button component with multiple variants and states
+ */
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
+  variant = 'primary',
+  size = 'default',
+  children,
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  className = '',
+  onClick,
+  type = 'button',
+  icon,
+  iconPosition = 'left',
+  ...props
+}, ref) => {
+  // Base button classes
+  const baseClasses = 'group relative inline-flex items-center justify-center font-semibold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed';
 
-export { Button, buttonVariants }
+  // Size variants
+  const sizeClasses = {
+    small: 'px-3 h-8 text-sm',
+    default: 'px-5 h-12 text-base',
+    large: 'px-6 h-14 text-lg'
+  };
+
+  // Style variants
+  const variantClasses = {
+    primary: 'text-white bg-gradient-to-br from-cyanGreen-800 to-cyan-800 hover:from-cyanGreen-900 hover:to-cyan-900 focus:ring-cyanGreen-500 rounded-lg',
+    secondary: 'text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 hover:border-yellowGreen-600 focus:ring-yellowGreen-500 shadow-sm hover:shadow-none rounded-lg',
+    outline: 'text-yellowGreen-700 bg-transparent border border-yellowGreen-600 hover:bg-yellowGreen-50 focus:ring-yellowGreen-500 rounded-lg',
+    ghost: 'text-gray-700 bg-transparent hover:bg-gray-100 focus:ring-gray-500 rounded-lg'
+  };
+
+  // Width classes
+  const widthClasses = fullWidth ? 'w-full' : '';
+
+  // Combine all classes
+  const buttonClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${widthClasses} ${className}`.trim();
+
+  // Handle loading state
+  const isDisabled = disabled || loading;
+
+  // Render icon
+  const renderIcon = () => {
+    if (loading) {
+      return (
+        <svg
+          className="animate-spin h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      );
+    }
+    return icon;
+  };
+
+  const iconElement = renderIcon();
+  const hasIcon = iconElement && !loading;
+  const iconSpacing = hasIcon ? (iconPosition === 'left' ? 'mr-2' : 'ml-2') : '';
+
+  return (
+    <button
+      ref={ref}
+      type={type}
+      className={buttonClasses}
+      disabled={isDisabled}
+      onClick={onClick}
+      aria-busy={loading}
+      {...props}
+    >
+      {/* Ring animation for primary buttons */}
+      {variant === 'primary' && !loading && (
+        <div className="absolute top-0 left-0 w-full h-full rounded-lg ring-4 ring-green-300 animate-pulse group-hover:ring-0 transition duration-300"></div>
+      )}
+
+      {/* Icon on left */}
+      {iconElement && iconPosition === 'left' && (
+        <span className={iconSpacing} aria-hidden="true">
+          {iconElement}
+        </span>
+      )}
+
+      {/* Button text */}
+      <span className="relative">
+        {loading ? 'Loading...' : children}
+      </span>
+
+      {/* Icon on right */}
+      {iconElement && iconPosition === 'right' && (
+        <span className={iconSpacing} aria-hidden="true">
+          {iconElement}
+        </span>
+      )}
+    </button>
+  );
+});
+
+Button.displayName = 'Button';
+
+export default Button;

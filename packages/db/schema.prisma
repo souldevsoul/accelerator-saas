@@ -1,0 +1,187 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  user
+  executor
+  admin
+}
+
+enum ProjectStatus {
+  mvp_pending
+  mvp_preview
+  active
+}
+
+enum AIRunKind {
+  mvp
+}
+
+enum AIRunStatus {
+  queued
+  running
+  completed
+  failed
+}
+
+enum TaskType {
+  feature
+  bug
+  content
+  other
+}
+
+enum TaskComplexity {
+  S
+  M
+  L
+}
+
+enum TaskStatus {
+  open
+  assigned
+  in_progress
+  awaiting_review
+  done
+  canceled
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  role      UserRole @default(user)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  projects          Project[]
+  assignedTasks     Task[]            @relation("TaskAssignee")
+  wallet            Wallet?
+  creditGrants      CreditGrant[]
+  creditLedger      CreditLedger[]
+  notifications     Notification[]
+
+  @@map("users")
+}
+
+model Project {
+  id           String        @id @default(uuid())
+  ownerId      String        @map("owner_id")
+  name         String
+  repoFullName String        @map("repo_full_name") // e.g. "org/repo"
+  status       ProjectStatus @default(mvp_pending)
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  // Relations
+  owner   User     @relation(fields: [ownerId], references: [id])
+  aiRuns  AIRun[]
+  tasks   Task[]
+
+  @@map("projects")
+}
+
+model AIRun {
+  id          String      @id @default(uuid())
+  projectId   String      @map("project_id")
+  kind        AIRunKind
+  status      AIRunStatus @default(queued)
+  costCredits Int         @default(0) @map("cost_credits")
+  prUrl       String?     @map("pr_url")
+  branch      String?
+  previewUrl  String?     @map("preview_url")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("ai_runs")
+}
+
+model Task {
+  id              String         @id @default(uuid())
+  projectId       String         @map("project_id")
+  title           String
+  description     String?
+  type            TaskType
+  complexity      TaskComplexity
+  status          TaskStatus     @default(open)
+  assigneeId      String?        @map("assignee_id")
+  githubBranch    String?        @map("github_branch")
+  githubPrUrl     String?        @map("github_pr_url")
+  reservedCredits Int            @default(0) @map("reserved_credits")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  // Relations
+  project  Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignee User?   @relation("TaskAssignee", fields: [assigneeId], references: [id])
+
+  @@map("tasks")
+}
+
+model Wallet {
+  userId    String   @id @map("user_id")
+  balance   BigInt   @default(0)
+  currency  String   @default("USD")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("wallets")
+}
+
+model CreditGrant {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  amount      BigInt
+  source      String?
+  externalRef String?  @map("external_ref") // Stripe payment intent, etc.
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("credit_grants")
+}
+
+model CreditLedger {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  delta     BigInt // Positive for credit, negative for debit
+  reason    String
+  refId     String?  @map("ref_id") // Reference to task, ai_run, etc.
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("credit_ledger")
+}
+
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String    @map("user_id")
+  kind      String
+  payload   Json
+  readAt    DateTime? @map("read_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("notifications")
+}

@@ -1,33 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Roboto_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import { Figtree } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ 
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-inter"
-});
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-const robotoMono = Roboto_Mono({
-  subsets: ["latin"],
-  variable: "--font-roboto-mono",
+  variable: "--font-figtree",
+  weight: ["300", "400", "500", "600", "700", "800", "900"]
 });
 
 export const metadata: Metadata = {
-  title: "Open Lovable v2",
-  description: "Re-imagine any website in seconds with AI-powered website builder.",
+  title: "Accelerator - Marketing Asset Management at Your Fingertips",
+  description: "Accelerator helps marketing teams easily store, organize, and access valuable assets from anywhere. Streamline your marketing workflow today.",
+  keywords: ["marketing assets", "asset management", "marketing tools", "digital assets", "marketing workflow"],
 };
 
 export default function RootLayout({
@@ -37,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${robotoMono.variable} font-sans`}>
+      <body className={`${figtree.variable} font-body bg-body text-body antialiased`}>
         {children}
       </body>
     </html>
