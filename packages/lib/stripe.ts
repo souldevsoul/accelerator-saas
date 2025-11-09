@@ -1,13 +1,16 @@
 import Stripe from 'stripe'
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing STRIPE_SECRET_KEY environment variable')
-}
+// For beta: Stripe is optional, will show "contact support" if not configured
+const STRIPE_ENABLED = !!process.env.STRIPE_SECRET_KEY && process.env.STRIPE_SECRET_KEY !== 'sk_test_placeholder'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2023-10-16',
-  typescript: true,
-})
+export const stripe = STRIPE_ENABLED
+  ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: '2023-10-16',
+      typescript: true,
+    })
+  : null
+
+export const isStripeConfigured = () => STRIPE_ENABLED
 
 /**
  * Credit packages configuration
@@ -46,6 +49,10 @@ export async function createCheckoutSession(
   successUrl: string,
   cancelUrl: string
 ): Promise<string> {
+  if (!stripe) {
+    throw new Error('Stripe is not configured. Please contact support to purchase credits.')
+  }
+
   const pkg = CREDIT_PACKAGES[packageKey]
 
   if (!pkg || !pkg.priceId) {
@@ -86,6 +93,10 @@ export function constructWebhookEvent(
   payload: string | Buffer,
   signature: string
 ): Stripe.Event {
+  if (!stripe) {
+    throw new Error('Stripe is not configured')
+  }
+
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
     throw new Error('Missing STRIPE_WEBHOOK_SECRET environment variable')
   }
@@ -103,6 +114,10 @@ export function constructWebhookEvent(
  * @returns Array of payment intents
  */
 export async function getCustomerPayments(customerId: string) {
+  if (!stripe) {
+    return []
+  }
+
   const paymentIntents = await stripe.paymentIntents.list({
     customer: customerId,
     limit: 100,
@@ -118,6 +133,10 @@ export async function getCustomerPayments(customerId: string) {
  * @returns Stripe customer object
  */
 export async function createCustomer(email: string, userId: string) {
+  if (!stripe) {
+    throw new Error('Stripe is not configured')
+  }
+
   return stripe.customers.create({
     email,
     metadata: {

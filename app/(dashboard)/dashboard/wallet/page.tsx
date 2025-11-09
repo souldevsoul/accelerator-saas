@@ -6,25 +6,48 @@ import { CreditPackages } from '@/components/wallet/CreditPackages'
 import { TransactionHistory } from '@/components/wallet/TransactionHistory'
 import { Wallet as WalletIcon, TrendingUp, TrendingDown, Clock } from 'lucide-react'
 
+// Force dynamic rendering to avoid DB access during build
+export const dynamic = 'force-dynamic'
+
 export default async function WalletPage() {
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
 
-  if (!user) {
-    redirect('/login')
-  }
+  // Beta: Skip auth check if Supabase not configured
+  let user = null
+  let dbUser = null
 
-  const dbUser = await prisma.user.findUnique({
-    where: { email: user.email! },
-    include: {
-      wallet: true,
-    },
-  })
+  if (supabase) {
+    const { data } = await supabase.auth.getUser()
+    user = data.user
 
-  if (!dbUser || !dbUser.wallet) {
-    redirect('/login')
+    if (!user) {
+      redirect('/login')
+    }
+
+    dbUser = await prisma.user.findUnique({
+      where: { email: user.email! },
+      include: {
+        wallet: true,
+      },
+    })
+
+    if (!dbUser || !dbUser.wallet) {
+      redirect('/login')
+    }
+  } else {
+    // For beta without auth, show message
+    return (
+      <div className="min-h-screen bg-gray-50 p-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-white rounded-lg shadow p-8 text-center">
+            <h1 className="text-2xl font-bold mb-4">Authentication Required</h1>
+            <p className="text-gray-600">
+              Wallet page requires authentication. We're currently in beta mode.
+            </p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   // Get transaction history

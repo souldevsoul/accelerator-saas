@@ -1,7 +1,19 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
+// Check if Supabase is configured (not placeholder values)
+const isSupabaseConfigured = () => {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  return !!(url && key && !url.includes('placeholder') && !key.includes('placeholder'))
+}
+
 export async function createClient() {
+  // For beta: return null if Supabase is not configured
+  if (!isSupabaseConfigured()) {
+    return null as any
+  }
+
   const cookieStore = await cookies()
 
   return createServerClient(
@@ -41,6 +53,9 @@ export async function createClient() {
  */
 export async function getUser() {
   const supabase = await createClient()
+  if (!supabase) {
+    return null
+  }
   const {
     data: { user },
   } = await supabase.auth.getUser()

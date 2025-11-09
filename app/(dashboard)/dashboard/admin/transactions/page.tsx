@@ -4,22 +4,31 @@ import { prisma } from 'db'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import { TransactionsTable } from '@/components/admin/TransactionsTable'
 
+// Force dynamic rendering to avoid DB access during build
+export const dynamic = 'force-dynamic'
+
 export default async function AdminTransactionsPage() {
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
 
-  if (!user) {
-    redirect('/login')
-  }
+  // Beta: Skip auth check if Supabase not configured
+  let user = null
+  let dbUser = null
 
-  const dbUser = await prisma.user.findUnique({
-    where: { email: user.email! },
-  })
+  if (supabase) {
+    const { data } = await supabase.auth.getUser()
+    user = data.user
 
-  if (!dbUser || dbUser.role !== 'admin') {
-    redirect('/dashboard')
+    if (!user) {
+      redirect('/login')
+    }
+
+    dbUser = await prisma.user.findUnique({
+      where: { email: user.email! },
+    })
+
+    if (!dbUser || dbUser.role !== 'admin') {
+      redirect('/dashboard')
+    }
   }
 
   // Fetch all transactions with user information
