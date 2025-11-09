@@ -9,8 +9,8 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: "Accelerator - Marketing Asset Management at Your Fingertips",
-  description: "Accelerator helps marketing teams easily store, organize, and access valuable assets from anywhere. Streamline your marketing workflow today.",
+  title: "Velocity - Marketing Asset Management at Your Fingertips",
+  description: "Velocity helps marketing teams easily store, organize, and access valuable assets from anywhere. Streamline your marketing workflow today.",
   keywords: ["marketing assets", "asset management", "marketing tools", "digital assets", "marketing workflow"],
 };
 

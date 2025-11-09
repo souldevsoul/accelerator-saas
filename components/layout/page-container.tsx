@@ -39,16 +39,16 @@ const PageContainer: React.FC<PageContainerProps> = ({
     } else {
       // Default title based on route
       const routeTitles: Record<string, string> = {
-        '/': 'Accelerator - Build Your MVP in Minutes',
-        '/about': 'About - Accelerator',
-        '/pricing': 'Pricing - Accelerator',
-        '/blog': 'Blog - Accelerator',
-        '/contact': 'Contact - Accelerator',
-        '/login': 'Login - Accelerator',
-        '/register': 'Sign Up - Accelerator'
+        '/': 'Velocity - Build Your MVP in Minutes',
+        '/about': 'About - Velocity',
+        '/pricing': 'Pricing - Velocity',
+        '/blog': 'Blog - Velocity',
+        '/contact': 'Contact - Velocity',
+        '/login': 'Login - Velocity',
+        '/register': 'Sign Up - Velocity'
       };
 
-      document.title = routeTitles[pathname] || 'Accelerator';
+      document.title = routeTitles[pathname] || 'Velocity';
     }
   }, [title, pathname]);
 

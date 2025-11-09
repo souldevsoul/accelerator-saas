@@ -5,13 +5,13 @@ import { Check, Sparkles } from 'lucide-react'
 
 export default function PricingPage() {
   const seoData = {
-    description: 'Simple, transparent pricing for Accelerator. Pay only for what you use with our credit-based system.',
+    description: 'Simple, transparent pricing for Velocity. Pay only for what you use with our credit-based system.',
     keywords: ['pricing', 'credits', 'plans', 'MVP development', 'cost']
   };
 
   return (
     <PageContainer
-      title="Pricing - Accelerator"
+      title="Pricing - Velocity"
       seo={seoData}
     >
       <section className="relative bg-body">
@@ -54,13 +54,13 @@ export default function PricingPage() {
               <div key={index} className="relative">
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-cyanGreen-800 to-cyan-800 rounded-full shadow-lg">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-purple-800 to-purple-900 rounded-full shadow-lg">
                       <Sparkles className="w-4 h-4 text-white" />
                       <span className="text-white uppercase text-xs font-semibold">RECOMMENDED</span>
                     </div>
                   </div>
                 )}
-                <div className={`rounded-2xl border ${pkg.popular ? 'border-cyanGreen-800 shadow-2xl scale-105' : 'border-gray-200 shadow-lg'} bg-white p-8 h-full flex flex-col`}>
+                <div className={`rounded-2xl border ${pkg.popular ? 'border-purple-600 shadow-2xl scale-105' : 'border-gray-200 shadow-lg'} bg-white p-8 h-full flex flex-col`}>
                   <div className="flex-1">
                     <div className="text-4xl font-bold mb-2 text-gray-900">
                       {pkg.credits.toLocaleString()}
@@ -111,7 +111,7 @@ export default function PricingPage() {
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* MVP Generation */}
             <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg">
-              <div className="w-12 h-12 bg-gradient-to-br from-cyanGreen-800 to-cyan-800 rounded-lg flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg flex items-center justify-center mb-6">
                 <span className="text-white font-bold text-xl">AI</span>
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">
@@ -246,7 +246,7 @@ export default function PricingPage() {
       {/* CTA */}
       <section className="bg-gray-50 py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-cyanGreen-800 to-cyan-800 rounded-3xl p-12 md:p-16 text-center">
+          <div className="max-w-4xl mx-auto bg-gradient-to-br from-purple-800 to-purple-900 rounded-3xl p-12 md:p-16 text-center">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-8">
               Ready to get started?
             </h2>

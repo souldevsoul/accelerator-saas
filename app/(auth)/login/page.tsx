@@ -2,81 +2,21 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import FormField from '@/components/ui/form-field'
 import PasswordInput from '@/components/ui/password-input'
-import { createClient, isSupabaseConfigured } from '@/lib/supabase/client'
-import { Github, Mail, AlertCircle } from 'lucide-react'
+import { Mail } from 'lucide-react'
+import { signIn } from 'next-auth/react'
 
 export default function LoginPage() {
   const router = useRouter()
-  const supabase = createClient()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
   const [message, setMessage] = useState<{type: 'error' | 'success', text: string} | null>(null)
-
-  // Check if Supabase is configured
-  if (!isSupabaseConfigured()) {
-    return (
-      <div className="antialiased bg-body text-body font-body min-h-screen">
-        <section className="relative py-12 md:py-24 overflow-hidden min-h-screen flex items-center">
-          <div className="absolute bottom-0 left-0 w-full pointer-events-none">
-            <div className="h-64 bg-gradient-to-t from-teal-50 to-transparent"></div>
-          </div>
-
-          <div className="relative container px-4 mx-auto w-full">
-            <div className="max-w-md mx-auto">
-              <div className="text-center mb-8">
-                <Link className="inline-flex items-center gap-2.5 mb-8 group" href="/">
-                  <div className="w-10 h-10 bg-gradient-to-br from-cyanGreen-800 to-cyan-800 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
-                    <span className="text-white font-bold text-xl">A</span>
-                  </div>
-                  <span className="text-2xl font-semibold text-gray-800">Accelerator</span>
-                </Link>
-              </div>
-
-              <div className="p-8 bg-white border border-gray-200 rounded-2xl shadow-lg">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="flex-shrink-0">
-                    <AlertCircle className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-gray-800 mb-2">Beta Mode</h2>
-                    <p className="text-gray-600 mb-4">
-                      We're currently in beta mode. Authentication is not available yet.
-                    </p>
-                    <p className="text-gray-600 mb-4">
-                      To get early access and start building your MVP, please contact our team:
-                    </p>
-                    <a
-                      href="mailto:support@accelerator.dev"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors font-medium"
-                    >
-                      <Mail className="w-4 h-4" />
-                      Contact Support
-                    </a>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-6 border-t border-gray-200">
-                  <Link
-                    href="/"
-                    className="text-sm text-teal-600 hover:text-teal-700 font-medium hover:underline"
-                  >
-                    ← Back to Home
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    )
-  }
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -85,27 +25,42 @@ export default function LoginPage() {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/auth/callback`,
+        // Handle signup
+        const response = await fetch('/api/auth/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
+          body: JSON.stringify({ email, password, name }),
         })
 
-        if (error) throw error
+        const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Signup failed')
+        }
 
         setMessage({
           type: 'success',
-          text: 'Check your email for the confirmation link!',
-        })
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
+          text: 'Account created! You can now sign in.',
         })
 
-        if (error) throw error
+        // Switch to login mode
+        setTimeout(() => {
+          setIsSignUp(false)
+          setMessage(null)
+        }, 2000)
+      } else {
+        // Handle signin
+        const result = await signIn('credentials', {
+          email,
+          password,
+          redirect: false,
+        })
+
+        if (result?.error) {
+          throw new Error('Invalid email or password')
+        }
 
         router.push('/dashboard')
         router.refresh()
@@ -116,26 +71,6 @@ export default function LoginPage() {
         text: error.message || 'An error occurred',
       })
     } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleGitHubAuth = async () => {
-    setIsLoading(true)
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'github',
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-        },
-      })
-
-      if (error) throw error
-    } catch (error: any) {
-      setMessage({
-        type: 'error',
-        text: error.message || 'An error occurred',
-      })
       setIsLoading(false)
     }
   }
@@ -187,6 +122,19 @@ export default function LoginPage() {
                   </div>
                 )}
 
+                {isSignUp && (
+                  <FormField
+                    label="Name (optional)"
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="John Doe"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    autoComplete="name"
+                  />
+                )}
+
                 <FormField
                   label="Email"
                   type="email"
@@ -234,32 +182,13 @@ export default function LoginPage() {
                 </Button>
               </form>
 
-              <div className="relative my-8">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-white text-gray-500">Or continue with</span>
-                </div>
-              </div>
-
-              <Button
-                onClick={handleGitHubAuth}
-                disabled={isLoading}
-                variant="outline"
-                fullWidth
-                icon={<Github className="w-5 h-5" />}
-                iconPosition="left"
-              >
-                GitHub
-              </Button>
-
               <div className="mt-8 text-center">
                 <button
                   type="button"
                   onClick={() => {
                     setIsSignUp(!isSignUp)
                     setMessage(null)
+                    setName('')
                   }}
                   className="text-sm text-gray-700 hover:text-gray-900 font-medium"
                 >

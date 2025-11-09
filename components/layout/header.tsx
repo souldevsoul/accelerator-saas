@@ -61,16 +61,16 @@ const Header = memo(() => {
         <div className="container mx-auto px-4">
           <div className="relative flex h-24 items-center">
             {/* Logo */}
-            <Link className="inline-flex items-center gap-2.5 group" href={getRouteByName('home')} aria-label="Accelerator - Home">
-              <div className="w-10 h-10 bg-gradient-to-br from-cyanGreen-800 to-cyan-800 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
-                <span className="text-white font-bold text-xl">A</span>
+            <Link className="inline-flex items-center gap-2.5 group" href={getRouteByName('home')} aria-label="Velocity - Home">
+              <div className="w-10 h-10 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
+                <span className="text-white font-bold text-xl">V</span>
               </div>
-              <span className="text-2xl font-semibold text-gray-800">Accelerator</span>
+              <span className="text-2xl font-semibold text-gray-800">Velocity</span>
             </Link>
 
             {/* Mobile menu button */}
             <button
-              className="lg:hidden flex items-center justify-center h-10 w-10 ml-auto bg-gradient-to-b from-cyanGreen-800 to-cyan-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyanGreen-500 focus:ring-offset-2"
+              className="lg:hidden flex items-center justify-center h-10 w-10 ml-auto bg-gradient-to-b from-purple-800 to-purple-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
               onClick={toggleMobileMenu}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
@@ -145,12 +145,12 @@ const Header = memo(() => {
                 className="inline-flex items-center gap-2.5 mr-auto"
                 href={getRouteByName('home')}
                 onClick={closeMobileMenu}
-                aria-label="Accelerator - Home"
+                aria-label="Velocity - Home"
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-cyanGreen-800 to-cyan-800 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">A</span>
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">V</span>
                 </div>
-                <span className="text-2xl font-semibold text-gray-800">Accelerator</span>
+                <span className="text-2xl font-semibold text-gray-800">Velocity</span>
               </Link>
               <button
                 className="p-2 focus:outline-none focus:ring-2 focus:ring-gray-500 rounded"

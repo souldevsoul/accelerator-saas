@@ -24,7 +24,7 @@ export default function HowItWorksPage() {
           {/* Header */}
           <div className="text-center mb-20">
             <h1 className="text-5xl font-bold text-gray-900 mb-4">
-              How Accelerator Works
+              How Velocity Works
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               From idea to production in four simple steps. No DevOps required.
@@ -173,7 +173,7 @@ export default function HowItWorksPage() {
           {/* Features Grid */}
           <div className="bg-gray-50 rounded-2xl p-12 mb-20">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Why teams choose Accelerator
+              Why teams choose Velocity
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">

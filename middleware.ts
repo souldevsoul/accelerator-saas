@@ -1,19 +1,21 @@
-import { type NextRequest } from 'next/server'
-import { updateSession } from './lib/supabase/middleware'
+import { auth } from '@/auth'
 
-export async function middleware(request: NextRequest) {
-  return await updateSession(request)
-}
+export default auth((req) => {
+  const isLoggedIn = !!req.auth
+  const isOnDashboard = req.nextUrl.pathname.startsWith('/dashboard')
+  const isOnAuth = req.nextUrl.pathname.startsWith('/login') || req.nextUrl.pathname.startsWith('/register')
+
+  // Redirect to login if accessing dashboard without auth
+  if (isOnDashboard && !isLoggedIn) {
+    return Response.redirect(new URL('/login', req.nextUrl))
+  }
+
+  // Redirect to dashboard if accessing auth pages while logged in
+  if (isOnAuth && isLoggedIn) {
+    return Response.redirect(new URL('/dashboard', req.nextUrl))
+  }
+})
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-  ],
+  matcher: ['/dashboard/:path*', '/login', '/register'],
 }
