@@ -1,6 +1,7 @@
 'use client';
 
 import { forwardRef } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -14,6 +15,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
   icon?: React.ReactElement;
   iconPosition?: 'left' | 'right';
+  asChild?: boolean;
 }
 
 /**
@@ -31,6 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   type = 'button',
   icon,
   iconPosition = 'left',
+  asChild = false,
   ...props
 }, ref) => {
   // Base button classes
@@ -83,10 +86,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   const hasIcon = iconElement && !loading;
   const iconSpacing = hasIcon ? (iconPosition === 'left' ? 'mr-2' : 'ml-2') : '';
 
+  const Comp = asChild ? Slot : 'button';
+
   return (
-    <button
+    <Comp
       ref={ref}
-      type={type}
+      type={asChild ? undefined : type}
       className={buttonClasses}
       disabled={isDisabled}
       onClick={onClick}
