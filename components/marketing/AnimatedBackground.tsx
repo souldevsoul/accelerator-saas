@@ -60,7 +60,7 @@ export function AnimatedBackground() {
 
     // Load cloud texture
     textureLoader.load('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png', (texture) => {
-      texture.magFilter = THREE.LinearMipMapLinearFilter
+      texture.magFilter = THREE.LinearFilter
       texture.minFilter = THREE.LinearMipMapLinearFilter
 
       // Shader material
