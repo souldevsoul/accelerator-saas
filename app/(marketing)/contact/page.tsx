@@ -22,9 +22,17 @@ export default function ContactPage() {
             <h1 className="font-heading tracking-tight text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 text-gray-900">
               Get in touch
             </h1>
-            <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto">
-              Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            <p className="text-xl text-gray-700 mb-4 max-w-2xl mx-auto">
+              Have questions? We'd love to hear from you.
             </p>
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 max-w-2xl mx-auto mb-12">
+              <p className="text-gray-900 font-semibold">
+                Form submissions are currently in development.
+              </p>
+              <p className="text-gray-700 mt-1">
+                Please email us directly at <a href="mailto:support@nimbusdev.com" className="text-blue-600 hover:underline">support@nimbusdev.com</a>
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -83,7 +91,7 @@ export default function ContactPage() {
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center">
                 Send us a message
               </h2>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
@@ -94,6 +102,7 @@ export default function ContactPage() {
                       id="name"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
                       placeholder="Your name"
+                      disabled
                     />
                   </div>
                   <div>
@@ -105,6 +114,7 @@ export default function ContactPage() {
                       id="email"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
                       placeholder="your@email.com"
+                      disabled
                     />
                   </div>
                 </div>
@@ -117,6 +127,7 @@ export default function ContactPage() {
                     id="subject"
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
                     placeholder="How can we help?"
+                    disabled
                   />
                 </div>
                 <div>
@@ -128,6 +139,7 @@ export default function ContactPage() {
                     rows={6}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition resize-none"
                     placeholder="Tell us more about your inquiry..."
+                    disabled
                   ></textarea>
                 </div>
                 <div className="text-center">
@@ -135,9 +147,13 @@ export default function ContactPage() {
                     variant="primary"
                     size="large"
                     className="w-full md:w-auto"
+                    disabled
                   >
-                    Send Message
+                    Send Message (Coming Soon)
                   </Button>
+                  <p className="text-sm text-gray-600 mt-4">
+                    This is an MVP stage feature. Please use email for now.
+                  </p>
                 </div>
               </form>
             </div>

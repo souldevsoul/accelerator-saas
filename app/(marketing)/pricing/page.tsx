@@ -24,9 +24,17 @@ export default function PricingPage() {
             <h1 className="font-heading tracking-tight text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 text-gray-900">
               Simple, transparent pricing
             </h1>
-            <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto">
-              Pay only for what you use. No subscriptions, no hidden fees. Buy credits and use them whenever you need.
+            <p className="text-xl text-gray-700 mb-4 max-w-2xl mx-auto">
+              Pay only for what you use. No subscriptions, no hidden fees.
             </p>
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 max-w-2xl mx-auto mb-12">
+              <p className="text-lg text-gray-900 font-semibold">
+                Credits are used to generate applications. 1 MVP = 100 credits.
+              </p>
+              <p className="text-gray-700 mt-2">
+                Buy credits once and use them whenever you need - they never expire.
+              </p>
+            </div>
           </div>
         </div>
 

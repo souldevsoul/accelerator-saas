@@ -24,10 +24,10 @@ export default function HowItWorksPage() {
           {/* Header */}
           <div className="text-center mb-20">
             <h1 className="text-5xl font-bold text-gray-900 mb-4">
-              How Velocity Works
+              How Nimbus Works
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From idea to production in four simple steps. No DevOps required.
+              From idea to production in four simple steps.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ export default function HowItWorksPage() {
                   </h2>
                 </div>
                 <p className="text-lg text-gray-600 mb-6">
-                  Describe your MVP in plain English. Tell us what problem you're solving and what features you need. Our AI understands context and requirements.
+                  Describe your MVP in plain English. Tell us what problem you're solving and what features you need. Connect your GitHub repository to get started.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -82,7 +82,7 @@ export default function HowItWorksPage() {
                   </h2>
                 </div>
                 <p className="text-lg text-gray-600 mb-6">
-                  Our AI analyzes your requirements and generates production-ready code. You'll get a complete React app with modern best practices, deployed and ready to preview.
+                  Our AI analyzes your requirements and generates production-ready code. You'll get a complete app with modern best practices, deployed and ready to preview.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -113,7 +113,7 @@ export default function HowItWorksPage() {
                   </h2>
                 </div>
                 <p className="text-lg text-gray-600 mb-6">
-                  Review your MVP in the live preview. Create tasks for additional features, bug fixes, or content updates. Choose between AI execution or expert developers.
+                  Review your MVP in the live preview. Create tasks for additional features, bug fixes, or content updates. Tasks are executed by AI or can be assigned to developers.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -126,7 +126,7 @@ export default function HowItWorksPage() {
                   </li>
                   <li className="flex items-start">
                     <Users className="w-5 h-5 text-green-600 mr-3 mt-1" />
-                    <span className="text-gray-700">Assign to AI or human experts</span>
+                    <span className="text-gray-700">AI execution with developer review</span>
                   </li>
                 </ul>
               </div>
@@ -150,7 +150,7 @@ export default function HowItWorksPage() {
                   </h2>
                 </div>
                 <p className="text-lg text-gray-600 mb-6">
-                  Review pull requests, approve changes, and merge to production. Deploy to your favorite platform with one click. Your MVP is ready to show the world.
+                  Review pull requests, approve changes, and merge to your main branch. Deploy to your preferred platform. Your MVP is ready to ship.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start">
@@ -173,7 +173,7 @@ export default function HowItWorksPage() {
           {/* Features Grid */}
           <div className="bg-gray-50 rounded-2xl p-12 mb-20">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-              Why teams choose Velocity
+              Why developers choose Nimbus
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
@@ -181,10 +181,10 @@ export default function HowItWorksPage() {
                   <Zap className="w-8 h-8 text-violet-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  Ship 10x Faster
+                  Ship Faster
                 </h3>
                 <p className="text-gray-600">
-                  From idea to production in hours, not months. Perfect for validating concepts quickly.
+                  From idea to production in hours, not weeks. Perfect for validating concepts quickly.
                 </p>
               </div>
               <div className="text-center">
@@ -192,10 +192,10 @@ export default function HowItWorksPage() {
                   <Users className="w-8 h-8 text-blue-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  Expert Quality
+                  Quality Code
                 </h3>
                 <p className="text-gray-600">
-                  Our network of vetted developers ensures production-ready code that scales.
+                  Production-ready code following modern best practices and standards.
                 </p>
               </div>
               <div className="text-center">
@@ -218,7 +218,7 @@ export default function HowItWorksPage() {
               Ready to build your MVP?
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              Join hundreds of founders shipping faster
+              Start shipping faster with Nimbus
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/login">

@@ -40,13 +40,13 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                 <p>
-                  Nimbus was born from a simple observation: developers spend too much time on repetitive tasks and not enough time on creative problem-solving.
+                  Nimbus helps developers ship faster by automating repetitive development tasks. Built by experienced developers who understand the pain of rebuilding authentication, databases, and deployment pipelines for every project.
                 </p>
                 <p>
-                  We built Nimbus to change that. By combining the power of AI with best development practices, we've created a platform that handles the mundane so you can focus on what matters.
+                  We've been there - setting up the same boilerplate code, configuring the same tools, solving the same problems over and over. That's why we built Nimbus.
                 </p>
                 <p>
-                  Today, thousands of developers use Nimbus to build MVPs, ship features, and iterate faster than ever before.
+                  Our platform handles the repetitive work so you can focus on what makes your product unique.
                 </p>
               </div>
             </div>
@@ -105,11 +105,10 @@ export default function AboutPage() {
       {/* Stats */}
       <section className="bg-gray-50 py-24">
         <div className="container px-4 mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-2 gap-12">
             {[
-              { number: '10,000+', label: 'MVPs Generated' },
-              { number: '50,000+', label: 'Features Shipped' },
-              { number: '5,000+', label: 'Happy Developers' }
+              { number: '100+', label: 'Projects Created' },
+              { number: '1,000+', label: 'Tasks Completed' }
             ].map((stat, index) => (
               <div key={index} className="text-center bg-white/40 backdrop-blur-md rounded-3xl border border-white/30 p-8">
                 <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-4">
