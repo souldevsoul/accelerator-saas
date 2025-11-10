@@ -8,13 +8,13 @@ import { Zap, Users, GitBranch, Eye, Check, ArrowRight, Code, Rocket, Shield, Cl
 
 export default function HomePage() {
   const seoData = {
-    description: 'Velocity helps teams build and ship MVPs faster with AI-powered code generation, expert developers, and seamless workflows.',
-    keywords: ['MVP development', 'AI code generation', 'rapid prototyping', 'developer platform', 'startup tools']
+    description: 'Nimbus is an AI-powered development platform that helps you build and deploy production-ready applications in hours, not months.',
+    keywords: ['MVP development', 'AI code generation', 'rapid prototyping', 'developer platform', 'startup tools', 'web development', 'no-code']
   };
 
   return (
     <PageContainer
-      title="Nimbus - Rise Above the Clouds"
+      title="Nimbus - Build Production-Ready Apps Faster"
       seo={seoData}
     >
       {/* Three.js Animated Background */}
@@ -28,17 +28,16 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-white/40 backdrop-blur-md rounded-3xl -z-10"></div>
 
             {/* MASSIVE HERO HEADING */}
-            <h1 className="font-heading tracking-tighter text-7xl sm:text-8xl lg:text-9xl font-black mb-8 leading-none pt-16">
-              <span className="block text-gray-900 drop-shadow-lg">RISE</span>
-              <span className="block bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent drop-shadow-lg animate-gradient">
-                ABOVE
+            <h1 className="font-heading tracking-tighter text-6xl sm:text-7xl lg:text-8xl font-black mb-8 leading-tight pt-16">
+              <span className="block text-gray-900">Build and Deploy</span>
+              <span className="block bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent">
+                Production-Ready Apps
               </span>
-              <span className="block text-gray-900 drop-shadow-lg">THE CLOUDS</span>
+              <span className="block text-gray-900">In Hours, Not Months</span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-800 mb-16 max-w-4xl mx-auto leading-relaxed font-light">
-              Ship your ideas into <span className="font-semibold text-blue-600">production</span> at the speed of flight.
-              <span className="block mt-2">AI-powered. Cloud-native. <span className="font-semibold text-blue-700">Sky high</span>.</span>
+            <p className="text-xl md:text-2xl text-gray-700 mb-16 max-w-4xl mx-auto leading-relaxed">
+              AI-powered development platform that generates complete web applications with authentication, databases, and deployment—ready to customize and ship.
             </p>
 
             {/* CTA Buttons - SLICK & MODERN */}
@@ -46,7 +45,7 @@ export default function HomePage() {
               <Link href="/login">
                 <Button className="group relative overflow-hidden bg-gradient-to-r from-cyan-500 via-blue-600 to-blue-700 hover:from-cyan-600 hover:via-blue-700 hover:to-blue-800 text-white font-black text-xl px-14 py-8 rounded-xl shadow-[0_20px_50px_rgba(6,182,212,0.5)] hover:shadow-[0_20px_60px_rgba(6,182,212,0.7)] transform hover:scale-105 hover:-translate-y-1 transition-all duration-300 border border-cyan-400/50">
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                  <span className="relative z-10">START BUILDING NOW</span>
+                  <span className="relative z-10">Get Started Free</span>
                 </Button>
               </Link>
               <Link href="/pricing">
@@ -67,27 +66,27 @@ export default function HomePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
             <div className="text-center group">
               <div className="text-5xl md:text-6xl font-black text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
-                10K+
+                <10hrs
               </div>
-              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Projects Launched</div>
+              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Average Setup Time</div>
             </div>
             <div className="text-center group">
               <div className="text-5xl md:text-6xl font-black text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
-                95%
+                100%
               </div>
-              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">User Satisfaction</div>
+              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Code Ownership</div>
             </div>
             <div className="text-center group">
               <div className="text-5xl md:text-6xl font-black text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
-                3min
+                100
               </div>
-              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Average Build</div>
+              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Free Credits to Start</div>
             </div>
             <div className="text-center group">
               <div className="text-5xl md:text-6xl font-black text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
                 24/7
               </div>
-              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Expert Support</div>
+              <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Platform Availability</div>
             </div>
           </div>
           </div>
@@ -101,7 +100,7 @@ export default function HomePage() {
             <div className="text-center mb-20">
               <p className="text-blue-600 font-bold text-sm uppercase tracking-wider mb-4">Features</p>
               <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6">
-                Everything you need <span className="text-blue-600">to soar</span>
+                Everything you need <span className="text-blue-600">to ship faster</span>
               </h2>
             </div>
 
@@ -109,9 +108,9 @@ export default function HomePage() {
               {[
                 {
                   icon: Zap,
-                  title: 'AI-Powered Generation',
-                  description: 'Production-ready code in 3 minutes. Modern tech stack with database & authentication included.',
-                  features: ['Next.js + React', 'TypeScript by default', 'Database ready']
+                  title: 'AI-Powered Code Generation',
+                  description: 'Generate complete Next.js applications with authentication, database schemas, and API routes. Customize and deploy in hours.',
+                  features: ['Next.js 15 + React', 'TypeScript included', 'Prisma + PostgreSQL']
                 },
                 {
                   icon: Code,
@@ -170,10 +169,10 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto text-center bg-white/40 backdrop-blur-md rounded-3xl p-16 border border-white/30">
             <h2 className="text-5xl md:text-7xl font-black text-gray-900 mb-6">
-              Ready to take <span className="text-blue-600">flight?</span>
+              Ready to build your <span className="text-blue-600">next project?</span>
             </h2>
             <p className="text-2xl text-gray-800 mb-12">
-              Join 10,000+ developers building faster with AI. <span className="block mt-2 text-blue-700">Start free, no credit card required.</span>
+              Get started with 100 free credits. <span className="block mt-2 text-gray-700">No credit card required.</span>
             </p>
             <Link href="/login">
               <Button className="group relative overflow-hidden bg-white hover:bg-gray-100 text-blue-600 font-black text-2xl px-16 py-10 rounded-2xl shadow-[0_30px_60px_rgba(255,255,255,0.3)] hover:shadow-[0_30px_80px_rgba(255,255,255,0.4)] transform hover:scale-105 transition-all duration-300">
@@ -181,18 +180,18 @@ export default function HomePage() {
                 <span className="relative z-10">Start Building Free</span>
               </Button>
             </Link>
-            <div className="flex flex-wrap justify-center items-center gap-8 mt-12 text-gray-700">
+            <div className="flex flex-wrap justify-center items-center gap-8 mt-12 text-sm text-gray-600">
               <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-blue-600" />
-                <span>SOC 2 Compliant</span>
+                <Check className="w-4 h-4 text-green-600" />
+                <span>Full code ownership</span>
               </div>
               <div className="flex items-center gap-2">
-                <Users className="w-5 h-5 text-blue-600" />
-                <span>24/7 Expert Support</span>
+                <Check className="w-4 h-4 text-green-600" />
+                <span>Export to GitHub</span>
               </div>
               <div className="flex items-center gap-2">
-                <Rocket className="w-5 h-5 text-blue-600" />
-                <span>10K+ Projects Launched</span>
+                <Check className="w-4 h-4 text-green-600" />
+                <span>Cancel anytime</span>
               </div>
             </div>
           </div>
