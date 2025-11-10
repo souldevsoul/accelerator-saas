@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import FormField from '@/components/ui/form-field'
 import PasswordInput from '@/components/ui/password-input'
+import { AnimatedBackground } from '@/components/marketing/AnimatedBackground'
 import { Mail } from 'lucide-react'
 import { signIn } from 'next-auth/react'
 
@@ -76,32 +77,33 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="antialiased bg-body text-body font-body min-h-screen">
-      {/* Background decoration */}
-      <section className="relative py-12 md:py-24 overflow-hidden min-h-screen flex items-center">
-        <div className="absolute bottom-0 left-0 w-full pointer-events-none">
-          <div className="h-64 bg-gradient-to-t from-teal-50 to-transparent"></div>
-        </div>
+    <div className="antialiased min-h-screen relative">
+      {/* Animated Cloud Background */}
+      <AnimatedBackground />
 
+      {/* Content */}
+      <section className="relative py-12 md:py-24 overflow-hidden min-h-screen flex items-center z-10">
         <div className="relative container px-4 mx-auto w-full">
           <div>
             {/* Logo */}
             <div className="text-center mb-8">
               <Link className="inline-flex items-center gap-2.5 mb-8 group" href="/">
-                <div className="w-10 h-10 bg-gradient-to-br from-cyanGreen-800 to-cyan-800 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
-                  <span className="text-white font-bold text-xl">A</span>
+                <div className="w-10 h-10 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" transform="rotate(-45 12 12)" />
+                  </svg>
                 </div>
-                <span className="text-2xl font-semibold text-gray-800">Accelerator</span>
+                <span className="text-2xl font-semibold text-gray-900">Nimbus</span>
               </Link>
             </div>
 
-            {/* Form Card */}
-            <div className="max-w-md p-8 mb-8 mx-auto bg-white border border-gray-200 rounded-2xl shadow-lg">
+            {/* Form Card - Glassmorphism */}
+            <div className="max-w-md p-8 mb-8 mx-auto bg-white/40 backdrop-blur-md border border-white/30 rounded-3xl shadow-xl">
               <header className="mb-8">
-                <h1 className="font-heading tracking-tight text-4xl font-bold mb-4 text-gray-800">
+                <h1 className="font-heading tracking-tight text-4xl font-bold mb-4 text-gray-900">
                   {isSignUp ? 'Create your account' : 'Welcome back'}
                 </h1>
-                <p className="text-gray-500">
+                <p className="text-gray-700">
                   {isSignUp
                     ? 'Start building your MVP today'
                     : 'Sign in to continue building'}
@@ -161,7 +163,7 @@ export default function LoginPage() {
                 {!isSignUp && (
                   <div className="text-right mb-8">
                     <a
-                      className="inline-block text-sm font-semibold text-yellowGreen-700 hover:text-yellowGreen-600 focus:outline-none focus:underline"
+                      className="inline-block text-sm font-semibold text-blue-600 hover:text-blue-700 focus:outline-none focus:underline"
                       href="#"
                     >
                       Forgot Password?
@@ -199,13 +201,13 @@ export default function LoginPage() {
               </div>
 
               {isSignUp && (
-                <p className="mt-6 text-xs text-center text-gray-500">
+                <p className="mt-6 text-xs text-center text-gray-700">
                   By signing up, you agree to our{' '}
-                  <Link href="/terms" className="text-teal-600 hover:text-teal-700 hover:underline font-medium">
+                  <Link href="/terms" className="text-blue-600 hover:text-blue-700 hover:underline font-medium">
                     Terms of Service
                   </Link>{' '}
                   and{' '}
-                  <Link href="/privacy" className="text-teal-600 hover:text-teal-700 hover:underline font-medium">
+                  <Link href="/privacy" className="text-blue-600 hover:text-blue-700 hover:underline font-medium">
                     Privacy Policy
                   </Link>
                 </p>
@@ -214,8 +216,8 @@ export default function LoginPage() {
 
             {isSignUp && (
               <div className="text-center">
-                <div className="inline-flex items-center px-6 py-3 bg-green-50 border border-green-200 rounded-lg text-gray-700 text-sm font-medium">
-                  <svg className="w-4 h-4 mr-2 text-green-600" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <div className="inline-flex items-center px-6 py-3 bg-white/40 backdrop-blur-md border border-white/30 rounded-xl text-gray-900 text-sm font-medium">
+                  <svg className="w-4 h-4 mr-2 text-blue-600" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                   Get 100 free credits when you sign up

@@ -57,15 +57,17 @@ const Header = memo(() => {
 
   return (
     <header role="banner">
-      <nav className="relative bg-white" role="navigation" aria-label="Main navigation">
+      <nav className="relative bg-white/10 backdrop-blur-lg mx-4 my-4 rounded-2xl border border-white/20" role="navigation" aria-label="Main navigation">
         <div className="container mx-auto px-4">
-          <div className="relative flex h-24 items-center">
+          <div className="relative flex h-20 items-center">
             {/* Logo */}
-            <Link className="inline-flex items-center gap-2.5 group" href={getRouteByName('home')} aria-label="Velocity - Home">
+            <Link className="inline-flex items-center gap-2.5 group" href={getRouteByName('home')} aria-label="Nimbus - Home">
               <div className="w-10 h-10 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
-                <span className="text-white font-bold text-xl">V</span>
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" transform="rotate(-45 12 12)" />
+                </svg>
               </div>
-              <span className="text-2xl font-semibold text-gray-800">Velocity</span>
+              <span className="text-2xl font-semibold text-gray-900">Nimbus</span>
             </Link>
 
             {/* Mobile menu button */}
@@ -95,7 +97,7 @@ const Header = memo(() => {
               {navigationItems.map((item, index) => (
                 <Link
                   key={item.to}
-                  className={`inline-block hover:text-yellowGreen-700 ${index < navigationItems.length - 1 ? 'mr-10' : ''} font-medium transition duration-200 focus:outline-none focus:underline ${isActiveRoute(item.to) ? 'text-yellowGreen-700' : ''}`}
+                  className={`inline-block text-gray-900 hover:text-blue-600 ${index < navigationItems.length - 1 ? 'mr-10' : ''} font-medium transition duration-200 focus:outline-none focus:underline ${isActiveRoute(item.to) ? 'text-blue-600' : ''}`}
                   href={item.to}
                   aria-current={isActiveRoute(item.to) ? 'page' : undefined}
                 >
@@ -107,13 +109,13 @@ const Header = memo(() => {
             {/* Desktop auth buttons */}
             <div className="hidden lg:block ml-auto">
               <Link
-                className="inline-flex items-center justify-center h-10 mr-4 px-4 text-center leading-loose text-sm text-gray-700 hover:text-yellowGreen-700 font-semibold transition duration-200 focus:outline-none focus:underline"
+                className="inline-flex items-center justify-center h-10 mr-4 px-4 text-center leading-loose text-sm text-gray-900 hover:text-blue-600 font-semibold transition duration-200 focus:outline-none focus:underline"
                 href={getRouteByName('login')}
               >
                 Login
               </Link>
               <Link
-                className="inline-flex items-center justify-center h-10 px-4 text-center leading-loose text-sm text-gray-700 hover:text-yellowGreen-700 font-semibold border border-gray-200 hover:border-yellowGreen-600 shadow-sm hover:shadow-none rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-yellowGreen-500 focus:ring-offset-2"
+                className="inline-flex items-center justify-center h-10 px-4 text-center leading-loose text-sm text-white font-semibold border border-blue-600 bg-blue-600 hover:bg-blue-700 shadow-sm rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 href={getRouteByName('register')}
               >
                 Get Started
@@ -145,12 +147,14 @@ const Header = memo(() => {
                 className="inline-flex items-center gap-2.5 mr-auto"
                 href={getRouteByName('home')}
                 onClick={closeMobileMenu}
-                aria-label="Velocity - Home"
+                aria-label="Nimbus - Home"
               >
                 <div className="w-10 h-10 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">V</span>
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" transform="rotate(-45 12 12)" />
+                  </svg>
                 </div>
-                <span className="text-2xl font-semibold text-gray-800">Velocity</span>
+                <span className="text-2xl font-semibold text-gray-800">Nimbus</span>
               </Link>
               <button
                 className="p-2 focus:outline-none focus:ring-2 focus:ring-gray-500 rounded"

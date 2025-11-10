@@ -9,9 +9,9 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: "Velocity - Marketing Asset Management at Your Fingertips",
-  description: "Velocity helps marketing teams easily store, organize, and access valuable assets from anywhere. Streamline your marketing workflow today.",
-  keywords: ["marketing assets", "asset management", "marketing tools", "digital assets", "marketing workflow"],
+  title: "Nimbus - Rise Above the Clouds",
+  description: "Nimbus helps teams ship MVPs faster with AI-powered code generation. Build production-ready apps in minutes, not months.",
+  keywords: ["MVP development", "AI code generation", "rapid prototyping", "developer platform", "startup tools"],
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${figtree.variable} font-body bg-body text-body antialiased`}>
+      <body className={`${figtree.variable} font-body text-body antialiased`} style={{ background: 'linear-gradient(135deg, #4a90e2 0%, #2563eb 50%, #1e40af 100%)', minHeight: '100vh' }}>
         {children}
       </body>
     </html>

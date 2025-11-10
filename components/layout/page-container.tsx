@@ -85,7 +85,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
   }, [seo.keywords]);
 
   return (
-    <div className="antialiased bg-body text-body font-body min-h-screen flex flex-col">
+    <div className="antialiased text-body font-body min-h-screen flex flex-col">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"

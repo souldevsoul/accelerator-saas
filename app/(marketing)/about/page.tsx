@@ -2,26 +2,28 @@ import Link from 'next/link'
 import PageContainer from '@/components/layout/page-container'
 import { Button } from '@/components/ui/button'
 import { Users, Target, Zap, Heart } from 'lucide-react'
+import { AnimatedBackground } from '@/components/marketing/AnimatedBackground'
 
 export default function AboutPage() {
   const seoData = {
-    description: 'Learn about Velocity - the AI-powered platform that helps developers build MVPs and ship features faster.',
+    description: 'Learn about Nimbus - the AI-powered platform that helps developers build MVPs and ship features faster.',
     keywords: ['about', 'company', 'mission', 'team', 'AI development', 'MVP builder']
   }
 
   return (
     <PageContainer
-      title="About Us - Velocity"
+      title="About Us - Nimbus"
       seo={seoData}
     >
       {/* Hero */}
       <section className="relative bg-body">
+        <AnimatedBackground />
         <div className="container px-4 mx-auto py-20 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-heading tracking-tight text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 text-gray-900">
               Building the future of software development
             </h1>
-            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-700 mb-12 max-w-2xl mx-auto">
               We're on a mission to empower developers to ship faster by automating the tedious parts of software development.
             </p>
           </div>
@@ -32,24 +34,24 @@ export default function AboutPage() {
       <section className="bg-gray-50 py-24">
         <div className="container px-4 mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
+            <div className="bg-white/40 backdrop-blur-md rounded-3xl border border-white/30 p-8">
               <h2 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-8">
                 Our Story
               </h2>
-              <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
                 <p>
-                  Velocity was born from a simple observation: developers spend too much time on repetitive tasks and not enough time on creative problem-solving.
+                  Nimbus was born from a simple observation: developers spend too much time on repetitive tasks and not enough time on creative problem-solving.
                 </p>
                 <p>
-                  We built Velocity to change that. By combining the power of AI with best development practices, we've created a platform that handles the mundane so you can focus on what matters.
+                  We built Nimbus to change that. By combining the power of AI with best development practices, we've created a platform that handles the mundane so you can focus on what matters.
                 </p>
                 <p>
-                  Today, thousands of developers use Velocity to build MVPs, ship features, and iterate faster than ever before.
+                  Today, thousands of developers use Nimbus to build MVPs, ship features, and iterate faster than ever before.
                 </p>
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-sky-600 to-blue-700 rounded-3xl"></div>
+              <div className="aspect-square bg-gradient-to-br from-blue-600 to-cyan-500 rounded-3xl"></div>
             </div>
           </div>
         </div>
@@ -84,14 +86,14 @@ export default function AboutPage() {
                 description: 'We believe in honest communication and clear pricing with no hidden fees.'
               }
             ].map((value, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-sky-600 to-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <div key={index} className="text-center bg-white/40 backdrop-blur-md rounded-3xl border border-white/30 p-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <value.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -109,11 +111,11 @@ export default function AboutPage() {
               { number: '50,000+', label: 'Features Shipped' },
               { number: '5,000+', label: 'Happy Developers' }
             ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-sky-600 to-blue-700 bg-clip-text text-transparent mb-4">
+              <div key={index} className="text-center bg-white/40 backdrop-blur-md rounded-3xl border border-white/30 p-8">
+                <div className="text-5xl md:text-6xl font-bold bg-gradient-to-br from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-4">
                   {stat.number}
                 </div>
-                <div className="text-xl text-gray-600">
+                <div className="text-xl text-gray-700">
                   {stat.label}
                 </div>
               </div>
@@ -125,12 +127,12 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="bg-white py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-sky-600 to-blue-700 rounded-3xl p-12 md:p-16 text-center">
+          <div className="max-w-4xl mx-auto bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-12 md:p-16 text-center">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-8">
               Join us on our mission
             </h2>
             <p className="text-xl text-white text-opacity-90 mb-10 max-w-2xl mx-auto">
-              Be part of the future of software development. Start building with Velocity today.
+              Be part of the future of software development. Start building with Nimbus today.
             </p>
             <Link href="/login">
               <Button
