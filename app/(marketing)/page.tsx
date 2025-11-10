@@ -178,9 +178,7 @@ export default function HomePage() {
             <Link href="/login">
               <Button className="group relative overflow-hidden bg-white hover:bg-gray-100 text-blue-600 font-black text-2xl px-16 py-10 rounded-2xl shadow-[0_30px_60px_rgba(255,255,255,0.3)] hover:shadow-[0_30px_80px_rgba(255,255,255,0.4)] transform hover:scale-105 transition-all duration-300">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/20 to-cyan-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                <Rocket className="w-8 h-8 mr-4 relative z-10" />
                 <span className="relative z-10">Start Building Free</span>
-                <ArrowRight className="w-8 h-8 ml-4 group-hover:translate-x-2 transition-transform relative z-10" />
               </Button>
             </Link>
             <div className="flex flex-wrap justify-center items-center gap-8 mt-12 text-gray-700">
