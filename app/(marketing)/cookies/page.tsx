@@ -2,13 +2,13 @@ import PageContainer from '@/components/layout/page-container'
 
 export default function CookiesPage() {
   const seoData = {
-    description: 'Cookie Policy for Velocity - Learn about how we use cookies and tracking technologies.',
+    description: 'Cookie Policy for Nimbus - Learn about how we use cookies and tracking technologies.',
     keywords: ['cookies', 'tracking', 'analytics', 'privacy', 'data']
   }
 
   return (
     <PageContainer
-      title="Cookie Policy - Velocity"
+      title="Cookie Policy - Nimbus"
       seo={seoData}
     >
       <section className="relative bg-body py-20">
@@ -165,7 +165,7 @@ export default function CookiesPage() {
                 If you have questions about our use of cookies, please contact us at:
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Email: privacy@velocitydev.com
+                Email: privacy@nimbusdev.com
               </p>
             </section>
           </div>

@@ -4,13 +4,13 @@ import { FileText, Shield, Cookie, Scale } from 'lucide-react'
 
 export default function LegalPage() {
   const seoData = {
-    description: 'Legal information and policies for Velocity - Terms, Privacy, and Compliance.',
+    description: 'Legal information and policies for Nimbus - Terms, Privacy, and Compliance.',
     keywords: ['legal', 'compliance', 'policies', 'terms', 'privacy']
   }
 
   return (
     <PageContainer
-      title="Legal - Velocity"
+      title="Legal - Nimbus"
       seo={seoData}
     >
       <section className="relative bg-body py-20">
@@ -29,7 +29,7 @@ export default function LegalPage() {
               {
                 icon: FileText,
                 title: 'Terms of Service',
-                description: 'Our terms and conditions for using the Velocity platform.',
+                description: 'Our terms and conditions for using the Nimbus platform.',
                 link: '/terms'
               },
               {
@@ -109,20 +109,20 @@ export default function LegalPage() {
               <div className="space-y-4 text-gray-600">
                 <div>
                   <strong className="text-gray-900">Email:</strong>{' '}
-                  <a href="mailto:legal@velocitydev.com" className="text-sky-600 hover:underline">
-                    legal@velocitydev.com
+                  <a href="mailto:legal@nimbusdev.com" className="text-sky-600 hover:underline">
+                    legal@nimbusdev.com
                   </a>
                 </div>
                 <div>
                   <strong className="text-gray-900">Data Protection Officer:</strong>{' '}
-                  <a href="mailto:dpo@velocitydev.com" className="text-sky-600 hover:underline">
-                    dpo@velocitydev.com
+                  <a href="mailto:dpo@nimbusdev.com" className="text-sky-600 hover:underline">
+                    dpo@nimbusdev.com
                   </a>
                 </div>
                 <div>
                   <strong className="text-gray-900">Security Issues:</strong>{' '}
-                  <a href="mailto:security@velocitydev.com" className="text-sky-600 hover:underline">
-                    security@velocitydev.com
+                  <a href="mailto:security@nimbusdev.com" className="text-sky-600 hover:underline">
+                    security@nimbusdev.com
                   </a>
                 </div>
               </div>

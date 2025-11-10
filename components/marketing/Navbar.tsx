@@ -29,10 +29,13 @@ export function Navbar() {
     <nav className="py-5 border-b border-white border-opacity-10">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <Link href="/">
-            <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center transition-transform hover:scale-105">
-              <span className="text-violet-900 font-bold text-lg">A</span>
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-9 h-9 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center transition-transform hover:scale-105">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" transform="rotate(-45 12 12)" />
+              </svg>
             </div>
+            <span className="text-lg font-semibold text-white">Nimbus</span>
           </Link>
 
           <div className="hidden lg:flex gap-2 p-1 rounded-full bg-white bg-opacity-10">

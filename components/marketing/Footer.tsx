@@ -3,16 +3,18 @@ import { Github, Twitter, Linkedin } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="bg-violet-950 border-t border-white border-opacity-10">
+    <footer className="bg-blue-950 border-t border-white border-opacity-10">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-5">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-violet-900 font-bold text-lg">A</span>
+              <div className="w-9 h-9 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" transform="rotate(-45 12 12)" />
+                </svg>
               </div>
-              <span className="text-lg font-semibold text-white">Accelerator</span>
+              <span className="text-lg font-semibold text-white">Nimbus</span>
             </div>
             <p className="text-sm text-white text-opacity-70 leading-relaxed max-w-xs">
               Turn your ideas into working MVPs with AI and expert developers.
@@ -122,16 +124,7 @@ export function Footer() {
 
         <div className="mt-16 pt-8 border-t border-white border-opacity-10">
           <p className="text-center text-sm text-white text-opacity-70">
-            © {new Date().getFullYear()} Accelerator. All rights reserved. Built on{' '}
-            <a
-              href="https://github.com/firecrawl/open-lovable"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-opacity-100 hover:underline font-medium"
-            >
-              Open Lovable
-            </a>
-            .
+            © {new Date().getFullYear()} Nimbus. All rights reserved.
           </p>
         </div>
       </div>

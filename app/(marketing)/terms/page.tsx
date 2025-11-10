@@ -2,13 +2,13 @@ import PageContainer from '@/components/layout/page-container'
 
 export default function TermsPage() {
   const seoData = {
-    description: 'Terms of Service for Velocity - Read our terms and conditions for using the platform.',
+    description: 'Terms of Service for Nimbus - Read our terms and conditions for using the platform.',
     keywords: ['terms', 'terms of service', 'legal', 'conditions', 'agreement']
   }
 
   return (
     <PageContainer
-      title="Terms of Service - Velocity"
+      title="Terms of Service - Nimbus"
       seo={seoData}
     >
       <section className="relative bg-body py-20">
@@ -24,14 +24,14 @@ export default function TermsPage() {
             <section className="mb-12">
               <h2 className="font-heading text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                By accessing and using Velocity ("Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these Terms of Service, please do not use the Service.
+                By accessing and using Nimbus ("Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these Terms of Service, please do not use the Service.
               </p>
             </section>
 
             <section className="mb-12">
               <h2 className="font-heading text-2xl font-bold text-gray-900 mb-4">2. Description of Service</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Velocity provides an AI-powered platform for software development, including but not limited to MVP generation, task-based development, and code generation services. The Service is provided "as is" and "as available" without any warranties.
+                Nimbus provides an AI-powered platform for software development, including but not limited to MVP generation, task-based development, and code generation services. The Service is provided "as is" and "as available" without any warranties.
               </p>
             </section>
 
@@ -79,7 +79,7 @@ export default function TermsPage() {
             <section className="mb-12">
               <h2 className="font-heading text-2xl font-bold text-gray-900 mb-4">6. Intellectual Property</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                The Service and its original content, features, and functionality are owned by Velocity and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
+                The Service and its original content, features, and functionality are owned by Nimbus and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
                 Code generated through the Service is owned by you, subject to our license terms for the underlying AI technology.
@@ -89,7 +89,7 @@ export default function TermsPage() {
             <section className="mb-12">
               <h2 className="font-heading text-2xl font-bold text-gray-900 mb-4">7. Limitation of Liability</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                To the maximum extent permitted by law, Velocity shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the Service.
+                To the maximum extent permitted by law, Nimbus shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use the Service.
               </p>
             </section>
 
@@ -113,7 +113,7 @@ export default function TermsPage() {
                 If you have any questions about these Terms of Service, please contact us at:
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Email: legal@velocitydev.com
+                Email: legal@nimbusdev.com
               </p>
             </section>
           </div>
