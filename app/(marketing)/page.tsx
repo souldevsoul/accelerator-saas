@@ -66,7 +66,7 @@ export default function HomePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
             <div className="text-center group">
               <div className="text-5xl md:text-6xl font-black text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
-                <10hrs
+                10hrs
               </div>
               <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">Average Setup Time</div>
             </div>

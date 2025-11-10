@@ -1,3 +1,5 @@
+'use client'
+
 import PageContainer from '@/components/layout/page-container'
 import { Button } from '@/components/ui/button'
 import { Mail, MessageSquare, HelpCircle, Building2 } from 'lucide-react'
