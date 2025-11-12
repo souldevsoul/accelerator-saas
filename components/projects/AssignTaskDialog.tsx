@@ -112,12 +112,12 @@ export function AssignTaskDialog({ taskId, estimatedCost }: { taskId: string; es
             </div>
           )}
 
-          <div className="p-4 bg-violet-50 border border-violet-200 rounded-lg space-y-2">
+          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-violet-900">Estimated Cost</span>
-              <span className="text-lg font-bold text-violet-700">{estimatedCost} credits</span>
+              <span className="text-sm text-blue-900">Estimated Cost</span>
+              <span className="text-lg font-bold text-blue-700">{estimatedCost} credits</span>
             </div>
-            <p className="text-xs text-violet-700">
+            <p className="text-xs text-blue-700">
               Credits will be reserved when assigned and deducted when the PR is merged. If the PR is closed without merging, credits will be refunded.
             </p>
           </div>

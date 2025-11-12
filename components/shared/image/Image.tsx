@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { ComponentProps } from "react";
 
 import compressorConfig from "@/public/compressor.json";

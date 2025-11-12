@@ -90,7 +90,7 @@ export default async function DashboardPage() {
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-600 text-sm">Total Projects</span>
-              <FolderKanban className="w-5 h-5 text-violet-600" />
+              <FolderKanban className="w-5 h-5 text-blue-600" />
             </div>
             <div className="text-3xl font-bold text-gray-900">{totalProjects}</div>
           </div>
@@ -106,7 +106,7 @@ export default async function DashboardPage() {
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-600 text-sm">Completed</span>
-              <CheckCircle2 className="w-5 h-5 text-green-600" />
+              <CheckCircle2 className="w-5 h-5 text-blue-600" />
             </div>
             <div className="text-3xl font-bold text-gray-900">{completedTasks}</div>
           </div>
@@ -114,7 +114,7 @@ export default async function DashboardPage() {
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-600 text-sm">Credits</span>
-              <AlertCircle className="w-5 h-5 text-orange-600" />
+              <AlertCircle className="w-5 h-5 text-sky-600" />
             </div>
             <div className="text-3xl font-bold text-gray-900">{balance}</div>
           </div>
@@ -160,7 +160,7 @@ export default async function DashboardPage() {
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-medium ${
                           project.status === 'active'
-                            ? 'bg-green-100 text-green-700'
+                            ? 'bg-blue-100 text-blue-700'
                             : project.status === 'mvp_preview'
                             ? 'bg-blue-100 text-blue-700'
                             : 'bg-gray-100 text-gray-700'

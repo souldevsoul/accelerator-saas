@@ -28,7 +28,7 @@ export function UsersTable({ users }: { users: UserWithWallet[] }) {
   const getRoleIcon = (role: string) => {
     switch (role) {
       case 'admin':
-        return <Crown className="w-4 h-4 text-yellow-600" />
+        return <Crown className="w-4 h-4 text-blue-600" />
       case 'executor':
         return <UserCog className="w-4 h-4 text-blue-600" />
       default:
@@ -39,7 +39,7 @@ export function UsersTable({ users }: { users: UserWithWallet[] }) {
   const getRoleBadge = (role: string) => {
     switch (role) {
       case 'admin':
-        return 'bg-yellow-100 text-yellow-700'
+        return 'bg-sky-100 text-yellow-700'
       case 'executor':
         return 'bg-blue-100 text-blue-700'
       default:
@@ -87,8 +87,8 @@ export function UsersTable({ users }: { users: UserWithWallet[] }) {
                 <tr key={user.id} className="hover:bg-gray-50 transition">
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center">
-                        <UserIcon className="w-5 h-5 text-violet-600" />
+                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <UserIcon className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
                         <p className="font-medium text-gray-900">{user.name || 'No name'}</p>

@@ -37,17 +37,17 @@ export default function WebBrowser({
           <div className="flex gap-2">
             <div
               className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                isLoading ? "bg-yellow-500" : "bg-red-500"
+                isLoading ? "bg-sky-500" : "bg-red-500"
               }`}
             />
             <div
               className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                isLoading ? "bg-yellow-500" : "bg-yellow-500"
+                isLoading ? "bg-sky-500" : "bg-sky-500"
               }`}
             />
             <div
               className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                isLoading ? "bg-yellow-500" : "bg-green-500"
+                isLoading ? "bg-sky-500" : "bg-blue-500"
               }`}
             />
           </div>

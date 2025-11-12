@@ -60,7 +60,7 @@ export function CreditPackages({ userId }: { userId: string }) {
     } catch (err: any) {
       // Show friendly beta message for Stripe not configured
       if (err.message.includes('Stripe is not configured') || err.message.includes('contact support')) {
-        setError('We are currently in beta. Please contact support@accelerator.dev to purchase credits.')
+        setError('We are currently in beta. Please contact support@nimbusdev.com to purchase credits.')
       } else {
         setError(err.message)
       }
@@ -77,8 +77,8 @@ export function CreditPackages({ userId }: { userId: string }) {
           <h3 className="text-sm font-semibold text-blue-900 mb-1">Beta Notice</h3>
           <p className="text-sm text-blue-700">
             We're currently in beta. To purchase credits, please contact{' '}
-            <a href="mailto:support@accelerator.dev" className="underline font-medium">
-              support@accelerator.dev
+            <a href="mailto:support@nimbusdev.com" className="underline font-medium">
+              support@nimbusdev.com
             </a>
             {' '}with your desired package.
           </p>
@@ -90,12 +90,12 @@ export function CreditPackages({ userId }: { userId: string }) {
           <div
             key={pkg.id}
             className={`relative bg-white rounded-2xl border-2 p-6 transition-all hover:shadow-lg ${
-              pkg.popular ? 'border-violet-600 shadow-md' : 'border-gray-200'
+              pkg.popular ? 'border-blue-600 shadow-md' : 'border-gray-200'
             }`}
           >
             {pkg.popular && (
               <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                <div className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1.5">
+                <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4" />
                   Most Popular
                 </div>
@@ -103,14 +103,14 @@ export function CreditPackages({ userId }: { userId: string }) {
             )}
 
             <div className="text-center mb-6">
-              <div className="inline-block bg-violet-100 text-violet-700 px-4 py-2 rounded-xl font-bold text-lg mb-3">
+              <div className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-xl font-bold text-lg mb-3">
                 {pkg.credits.toLocaleString()} Credits
               </div>
               <div className="mb-2">
                 <span className="text-4xl font-bold text-gray-900">${pkg.price}</span>
               </div>
               {pkg.savings && (
-                <div className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
                   Save {pkg.savings}%
                 </div>
               )}
@@ -119,7 +119,7 @@ export function CreditPackages({ userId }: { userId: string }) {
             <ul className="space-y-3 mb-6">
               {pkg.features.map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
-                  <Check className="w-5 h-5 text-violet-600 flex-shrink-0 mt-0.5" />
+                  <Check className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
                   <span>{feature}</span>
                 </li>
               ))}
@@ -130,7 +130,7 @@ export function CreditPackages({ userId }: { userId: string }) {
               disabled={loadingPackage !== null}
               className={`w-full ${
                 pkg.popular
-                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700'
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
                   : ''
               }`}
               variant={pkg.popular ? 'primary' : 'outline'}

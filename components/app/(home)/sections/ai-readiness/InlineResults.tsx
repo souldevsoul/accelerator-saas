@@ -262,7 +262,7 @@ export default function InlineResults({
                     transition={{ delay: 1 + index * 0.1, type: "spring" }}
                     className={`
                       w-24 h-24 rounded-full flex items-center justify-center
-                      ${item.value ? 'bg-green-500' : 'bg-red-500'}
+                      ${item.value ? 'bg-blue-500' : 'bg-red-500'}
                     `}
                   >
                     {item.value ? (
@@ -277,7 +277,7 @@ export default function InlineResults({
                 <div className="mb-12">
                   <item.icon className={`
                     w-24 h-24
-                    ${item.value ? 'text-green-600' : 'text-red-600'}
+                    ${item.value ? 'text-blue-600' : 'text-red-600'}
                   `} />
                 </div>
                 
@@ -291,7 +291,7 @@ export default function InlineResults({
                   </div>
                   <div className={`
                     text-label-small font-semibold
-                    ${item.value ? 'text-green-600' : 'text-red-600'}
+                    ${item.value ? 'text-blue-600' : 'text-red-600'}
                   `}>
                     {item.detail}
                   </div>

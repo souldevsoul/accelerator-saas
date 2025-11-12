@@ -15,29 +15,29 @@ export function TransactionHistory({ transactions }: { transactions: CreditLedge
 
   const getTransactionIcon = (reason: string, delta: number | bigint) => {
     if (reason.includes('purchase') || reason.includes('grant')) {
-      return <ArrowUpCircle className="w-5 h-5 text-green-600" />
+      return <ArrowUpCircle className="w-5 h-5 text-blue-600" />
     }
     if (reason.includes('refund')) {
       return <RefreshCw className="w-5 h-5 text-blue-600" />
     }
     if (reason.includes('reserve')) {
-      return <ArrowDownCircle className="w-5 h-5 text-orange-600" />
+      return <ArrowDownCircle className="w-5 h-5 text-sky-600" />
     }
     if (reason.includes('MVP')) {
-      return <Zap className="w-5 h-5 text-violet-600" />
+      return <Zap className="w-5 h-5 text-blue-600" />
     }
     if (reason.includes('task') || reason.includes('Task')) {
-      return <User className="w-5 h-5 text-indigo-600" />
+      return <User className="w-5 h-5 text-blue-600" />
     }
     return delta > 0 ? (
-      <ArrowUpCircle className="w-5 h-5 text-green-600" />
+      <ArrowUpCircle className="w-5 h-5 text-blue-600" />
     ) : (
       <ArrowDownCircle className="w-5 h-5 text-red-600" />
     )
   }
 
   const getTransactionColor = (delta: number | bigint) => {
-    return delta > 0 ? 'text-green-600' : 'text-red-600'
+    return delta > 0 ? 'text-blue-600' : 'text-red-600'
   }
 
   const getBackgroundColor = (reason: string) => {
@@ -51,7 +51,7 @@ export function TransactionHistory({ transactions }: { transactions: CreditLedge
       return 'bg-orange-50'
     }
     if (reason.includes('MVP')) {
-      return 'bg-violet-50'
+      return 'bg-blue-50'
     }
     return 'bg-gray-50'
   }

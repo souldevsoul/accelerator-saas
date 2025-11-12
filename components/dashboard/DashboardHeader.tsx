@@ -31,12 +31,12 @@ export function DashboardHeader({ title, description, balance, action }: Dashboa
           {balance !== undefined && (
             <Link
               href="/dashboard/wallet"
-              className="flex items-center px-4 py-2 bg-gradient-to-br from-violet-50 to-indigo-50 border border-violet-200 rounded-lg hover:border-violet-300 transition"
+              className="flex items-center px-4 py-2 bg-gradient-to-br from-blue-50 to-blue-50 border border-blue-200 rounded-lg hover:border-blue-300 transition"
             >
-              <Wallet className="w-5 h-5 text-violet-600 mr-2" />
+              <Wallet className="w-5 h-5 text-blue-600 mr-2" />
               <div className="text-left">
-                <div className="text-xs text-violet-600 font-medium">Balance</div>
-                <div className="text-lg font-bold text-violet-700">
+                <div className="text-xs text-blue-600 font-medium">Balance</div>
+                <div className="text-lg font-bold text-blue-700">
                   {balance.toLocaleString()}
                 </div>
               </div>

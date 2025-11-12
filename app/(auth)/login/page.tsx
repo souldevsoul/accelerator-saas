@@ -116,7 +116,7 @@ export default function LoginPage() {
                     className={`mb-4 p-3 rounded-lg text-sm font-medium ${
                       message.type === 'error'
                         ? 'bg-red-50 text-red-700 border border-red-200'
-                        : 'bg-green-50 text-green-700 border border-green-200'
+                        : 'bg-green-50 text-blue-700 border border-green-200'
                     }`}
                     role="alert"
                   >

@@ -81,7 +81,7 @@ export default async function AdminTransactionsPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-2xl border border-gray-200 p-6">
             <p className="text-sm font-medium text-gray-600 mb-2">Total Credits Earned</p>
-            <p className="text-3xl font-bold text-green-600">
+            <p className="text-3xl font-bold text-blue-600">
               +{totalStats._sum.delta?.toLocaleString() || 0}
             </p>
           </div>

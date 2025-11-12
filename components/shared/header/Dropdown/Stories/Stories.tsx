@@ -1,10 +1,11 @@
+import Link from "next/link";
 import ArrowUp from "./_svg/ArrowUp";
 import Replit from "./_svg/Replit";
 import StoriesFlame from "./Flame/Flame";
 
 export default function HeaderDropdownStories() {
   return (
-    <a
+    <Link
       className="pt-32 pr-32 pl-44 pb-48 group block border-b border-border-faint relative overflow-clip"
       href="/blog/how-replit-uses-firecrawl-to-power-ai-agents"
     >
@@ -26,6 +27,6 @@ export default function HeaderDropdownStories() {
       </div>
 
       <StoriesFlame />
-    </a>
+    </Link>
   );
 }

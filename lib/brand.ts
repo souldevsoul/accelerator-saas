@@ -7,11 +7,11 @@
 
 export const brand = {
   // Brand Name
-  name: 'Velocity',
+  name: 'Nimbus',
   tagline: 'Ship features at the speed of thought',
 
   // Brand Description
-  description: 'Velocity is an AI-powered platform that helps developers build MVPs and ship features faster than ever before.',
+  description: 'Nimbus is an AI-powered platform that helps developers build MVPs and ship features faster than ever before.',
 
   // Color Palette - Clean Fintech Sky Blue Theme
   colors: {
@@ -89,11 +89,11 @@ export const brand = {
 
   // Contact Information
   contact: {
-    email: 'hello@velocitydev.com',
-    support: 'support@velocitydev.com',
-    legal: 'legal@velocitydev.com',
-    privacy: 'privacy@velocitydev.com',
-    enterprise: 'enterprise@velocitydev.com',
+    email: 'hello@nimbusdev.com',
+    support: 'support@nimbusdev.com',
+    legal: 'legal@nimbusdev.com',
+    privacy: 'privacy@nimbusdev.com',
+    enterprise: 'enterprise@nimbusdev.com',
   },
 
   // Social Media (placeholders)

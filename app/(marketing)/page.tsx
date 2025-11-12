@@ -182,15 +182,15 @@ export default function HomePage() {
             </Link>
             <div className="flex flex-wrap justify-center items-center gap-8 mt-12 text-sm text-gray-600">
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-green-600" />
+                <Check className="w-4 h-4 text-blue-600" />
                 <span>Full code ownership</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-green-600" />
+                <Check className="w-4 h-4 text-blue-600" />
                 <span>Export to GitHub</span>
               </div>
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-green-600" />
+                <Check className="w-4 h-4 text-blue-600" />
                 <span>Cancel anytime</span>
               </div>
             </div>

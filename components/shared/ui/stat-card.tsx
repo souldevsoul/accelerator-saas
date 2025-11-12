@@ -27,7 +27,7 @@ export function StatCard({
 }: StatCardProps) {
   const trendColor =
     trend === "up"
-      ? "text-green-600"
+      ? "text-blue-600"
       : trend === "down"
         ? "text-red-600"
         : "text-black-alpha-64";

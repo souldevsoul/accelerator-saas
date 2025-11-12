@@ -125,7 +125,7 @@ export function Navbar() {
               {user ? (
                 <Link
                   href="/dashboard"
-                  className="block px-6 py-3 text-sm font-semibold text-center text-violet-900 bg-white rounded-lg hover:bg-opacity-90 transition"
+                  className="block px-6 py-3 text-sm font-semibold text-center text-blue-900 bg-white rounded-lg hover:bg-opacity-90 transition"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Dashboard
@@ -141,7 +141,7 @@ export function Navbar() {
                   </Link>
                   <Link
                     href="/login"
-                    className="block px-6 py-3 text-sm font-semibold text-center text-violet-900 bg-white rounded-lg hover:bg-opacity-90 transition"
+                    className="block px-6 py-3 text-sm font-semibold text-center text-blue-900 bg-white rounded-lg hover:bg-opacity-90 transition"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Get Started

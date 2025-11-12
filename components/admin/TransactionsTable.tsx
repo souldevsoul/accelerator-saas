@@ -24,7 +24,7 @@ export function TransactionsTable({ transactions }: { transactions: TransactionW
   })
 
   const getTransactionColor = (delta: number | bigint) => {
-    return delta > 0 ? 'text-green-600' : 'text-red-600'
+    return delta > 0 ? 'text-blue-600' : 'text-red-600'
   }
 
   const getBackgroundColor = (reason: string) => {
@@ -38,7 +38,7 @@ export function TransactionsTable({ transactions }: { transactions: TransactionW
       return 'bg-orange-50'
     }
     if (reason.includes('MVP')) {
-      return 'bg-violet-50'
+      return 'bg-blue-50'
     }
     return 'bg-white'
   }
@@ -85,8 +85,8 @@ export function TransactionsTable({ transactions }: { transactions: TransactionW
                 >
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center">
-                        <UserIcon className="w-4 h-4 text-violet-600" />
+                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                        <UserIcon className="w-4 h-4 text-blue-600" />
                       </div>
                       <div>
                         <p className="font-medium text-gray-900 text-sm">
@@ -105,7 +105,7 @@ export function TransactionsTable({ transactions }: { transactions: TransactionW
                   <td className="py-4 px-6 text-right">
                     <div className="flex items-center justify-end gap-1.5">
                       {transaction.delta > 0 ? (
-                        <ArrowUpCircle className="w-4 h-4 text-green-600" />
+                        <ArrowUpCircle className="w-4 h-4 text-blue-600" />
                       ) : (
                         <ArrowDownCircle className="w-4 h-4 text-red-600" />
                       )}

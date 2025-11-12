@@ -73,13 +73,13 @@ export default async function ProjectsPage() {
                 <Link
                   key={project.id}
                   href={`/dashboard/projects/${project.id}`}
-                  className="bg-white rounded-xl border border-gray-200 hover:border-violet-300 hover:shadow-md transition group"
+                  className="bg-white rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition group"
                 >
                   <div className="p-6">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-violet-600 transition">
+                        <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition">
                           {project.name}
                         </h3>
                         <div className="flex items-center text-sm text-gray-500">
@@ -90,7 +90,7 @@ export default async function ProjectsPage() {
                       <span
                         className={`px-2.5 py-1 rounded-full text-xs font-medium ${
                           project.status === 'active'
-                            ? 'bg-green-100 text-green-700'
+                            ? 'bg-blue-100 text-blue-700'
                             : project.status === 'mvp_preview'
                             ? 'bg-blue-100 text-blue-700'
                             : 'bg-gray-100 text-gray-700'
@@ -108,7 +108,7 @@ export default async function ProjectsPage() {
                       </div>
                       <div className="bg-gray-50 rounded-lg p-3">
                         <div className="text-xs text-gray-600 mb-1">Completed</div>
-                        <div className="text-2xl font-bold text-green-600">{completedTasks}</div>
+                        <div className="text-2xl font-bold text-blue-600">{completedTasks}</div>
                       </div>
                     </div>
 
@@ -127,7 +127,7 @@ export default async function ProjectsPage() {
                           href={latestRun.prUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-violet-600 hover:text-violet-700 flex items-center"
+                          className="text-sm text-blue-600 hover:text-blue-700 flex items-center"
                           onClick={(e) => e.stopPropagation()}
                         >
                           View MVP PR →

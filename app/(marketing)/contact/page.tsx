@@ -27,7 +27,7 @@ export default function ContactPage() {
             <p className="text-xl text-gray-700 mb-4 max-w-2xl mx-auto">
               Have questions? We'd love to hear from you.
             </p>
-            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 max-w-2xl mx-auto mb-12">
+            <div className="bg-sky-50 border border-yellow-200 rounded-xl p-4 max-w-2xl mx-auto mb-12">
               <p className="text-gray-900 font-semibold">
                 Form submissions are currently in development.
               </p>

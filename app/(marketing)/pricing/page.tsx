@@ -97,7 +97,7 @@ export default function PricingPage() {
                     <ul className="space-y-3">
                       {pkg.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start">
-                          <Check className="w-5 h-5 mr-3 flex-shrink-0 mt-0.5 text-green-600" />
+                          <Check className="w-5 h-5 mr-3 flex-shrink-0 mt-0.5 text-blue-600" />
                           <span className="text-sm text-gray-700">
                             {feature}
                           </span>
@@ -171,19 +171,19 @@ export default function PricingPage() {
                 <span className="font-semibold text-gray-900 text-lg block mb-4">Base Costs:</span>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-blue-600" />
                     Feature: 30 credits
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-blue-600" />
                     Bug: 15 credits
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-blue-600" />
                     Content: 10 credits
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-blue-600" />
                     Other: 20 credits
                   </li>
                 </ul>
@@ -192,15 +192,15 @@ export default function PricingPage() {
                 <span className="font-semibold text-gray-900 text-lg block mb-4">Complexity:</span>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-blue-600" />
                     Small (S): 1×
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-blue-600" />
                     Medium (M): 2×
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-600" />
+                    <Check className="w-4 h-4 text-blue-600" />
                     Large (L): 3×
                   </li>
                 </ul>
