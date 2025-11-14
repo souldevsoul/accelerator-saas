@@ -27,7 +27,7 @@ const CTASection: React.FC<CTASectionProps> = ({
   return (
     <section className={`py-12 md:py-24 ${className}`}>
       <div className="container px-4 mx-auto">
-        <div className="relative pb-16 border-b border-yellowGreen-400 overflow-hidden">
+        <div className="relative pb-16 border-b border-blue-400 overflow-hidden">
           {/* Background Images */}
           <Image
             className="absolute bottom-0 left-1/2 md:-mb-2 lg:-mb-20 transform -translate-x-1/2"
@@ -49,7 +49,7 @@ const CTASection: React.FC<CTASectionProps> = ({
           {/* Content */}
           <div className="relative max-w-sm md:max-w-xl mx-auto text-center">
             {badge && (
-              <span className="inline-flex items-center h-6 mb-4 px-2 text-sm font-medium text-yellowGreen-700 bg-yellowGreen-200 rounded-full">
+              <span className="inline-flex items-center h-6 mb-4 px-2 text-sm font-medium text-blue-700 bg-blue-200 rounded-full">
                 {badge}
               </span>
             )}

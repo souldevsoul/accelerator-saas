@@ -46,7 +46,7 @@ const FormField = forwardRef<HTMLInputElement, FormFieldProps>(({
   // Error state classes
   const errorClasses = error
     ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-    : 'border-gray-200 focus:border-yellowGreen-500 focus:ring-yellowGreen-500';
+    : 'border-gray-200 focus:border-blue-500 focus:ring-blue-500';
 
   // Disabled state classes
   const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : '';

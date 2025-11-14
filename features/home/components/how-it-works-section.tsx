@@ -4,7 +4,7 @@ const HowItWorksSection: React.FC = () => {
       <div className="container px-4 mx-auto">
         <div className="max-w-6xl mx-auto">
           <div className="max-w-4xl mb-24">
-            <span className="inline-flex items-center h-6 mb-4 px-2 text-xs uppercase font-medium text-yellowGreen-700 bg-yellowGreen-200 rounded-full">HOW IT WORKS</span>
+            <span className="inline-flex items-center h-6 mb-4 px-2 text-xs uppercase font-medium text-blue-700 bg-blue-200 rounded-full">HOW IT WORKS</span>
             <h1 className="font-heading tracking-tight text-4xl sm:text-5xl font-bold mb-4">We revolutionized the way we manage digital content</h1>
             <p className="text-lg text-gray-500">Using our platform is easy and straightforward. Here&apos;s how it works:</p>
           </div>
