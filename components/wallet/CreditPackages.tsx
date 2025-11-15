@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Loader2, Check, Sparkles, Mail } from 'lucide-react'
+import { Loader2, Check, Sparkles, ShoppingCart } from 'lucide-react'
 
 const PACKAGES = [
   {
@@ -45,8 +45,7 @@ export function CreditPackages({ userId }: { userId: string }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          packageId,
-          userId,
+          packageKey: packageId,
         }),
       })
 
@@ -58,33 +57,13 @@ export function CreditPackages({ userId }: { userId: string }) {
       const { url } = await response.json()
       window.location.href = url
     } catch (err: any) {
-      // Show friendly beta message for Stripe not configured
-      if (err.message.includes('Stripe is not configured') || err.message.includes('contact support')) {
-        setError('We are currently in beta. Please contact support@nimbusdev.com to purchase credits.')
-      } else {
-        setError(err.message)
-      }
+      setError(err.message || 'Failed to initiate checkout. Please try again.')
       setLoadingPackage(null)
     }
   }
 
   return (
     <div>
-      {/* Beta Notice */}
-      <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg flex items-start gap-3">
-        <Mail className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-        <div>
-          <h3 className="text-sm font-semibold text-blue-900 mb-1">Beta Notice</h3>
-          <p className="text-sm text-blue-700">
-            We're currently in beta. To purchase credits, please contact{' '}
-            <a href="mailto:support@nimbusdev.com" className="underline font-medium">
-              support@nimbusdev.com
-            </a>
-            {' '}with your desired package.
-          </p>
-        </div>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {PACKAGES.map((pkg) => (
           <div
@@ -143,8 +122,8 @@ export function CreditPackages({ userId }: { userId: string }) {
                 </>
               ) : (
                 <>
-                  <Mail className="w-4 h-4 mr-2" />
-                  Contact for Purchase
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Buy Now
                 </>
               )}
             </Button>

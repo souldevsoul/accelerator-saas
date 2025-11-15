@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from 'db'
-import { requireUser } from '@/lib/supabase/server'
+import { auth } from '@/auth'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -12,7 +12,13 @@ export const revalidate = 0
  */
 export async function GET(request: NextRequest) {
   try {
-    const user = await requireUser()
+    const session = await auth()
+
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const user = session.user
 
     // Get user from database
     const dbUser = await prisma.user.findUnique({
@@ -56,7 +62,13 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
-    const user = await requireUser()
+    const session = await auth()
+
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const user = session.user
     const body = await request.json()
 
     const { name, repoFullName } = body
@@ -85,7 +97,7 @@ export async function POST(request: NextRequest) {
       dbUser = await prisma.user.create({
         data: {
           email: user.email!,
-          name: user.user_metadata?.full_name || user.email!.split('@')[0],
+          name: user.name || user.email!.split('@')[0],
         },
       })
 

@@ -45,12 +45,12 @@ export function DashboardHeader({ title, description, balance, action }: Dashboa
 
           {/* Action Button */}
           {action && (
-            <Button asChild size="large">
-              <Link href={action.href}>
+            <Link href={action.href}>
+              <Button size="large" type="button">
                 {action.icon}
                 {action.label}
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           )}
         </div>
       </div>

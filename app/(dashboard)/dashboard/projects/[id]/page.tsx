@@ -1,12 +1,12 @@
-import { requireUser } from '@/lib/supabase/server'
+import { auth } from '@/auth'
 import { prisma } from 'db'
 import { redirect, notFound } from 'next/navigation'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
-import { Button } from '@/components/ui/button'
 import { GenerateMVPButton } from '@/components/projects/GenerateMVPButton'
-import { CreateTaskDialog } from '@/components/projects/CreateTaskDialog'
-import { TaskList } from '@/components/projects/TaskList'
-import { GitBranch, ExternalLink, Zap } from 'lucide-react'
+import { LivePreview } from '@/components/projects/LivePreview'
+import { DeployToVercelButton } from '@/components/projects/DeployToVercelButton'
+import { QuickActions } from '@/components/projects/QuickActions'
+import { GitBranch, ExternalLink, Zap, Sparkles } from 'lucide-react'
 
 type Props = {
   params: Promise<{ id: string }>
@@ -14,12 +14,14 @@ type Props = {
 
 export default async function ProjectDetailPage({ params }: Props) {
   const { id } = await params
-  const user = await requireUser().catch(() => {
+  const session = await auth()
+
+  if (!session?.user?.email) {
     redirect('/login')
-  })
+  }
 
   const dbUser = await prisma.user.findUnique({
-    where: { email: user.email! },
+    where: { email: session.user.email },
     include: {
       wallet: true,
     },
@@ -61,7 +63,6 @@ export default async function ProjectDetailPage({ params }: Props) {
     notFound()
   }
 
-  // Check ownership
   if (project.ownerId !== dbUser.id && dbUser.role !== 'admin') {
     redirect('/dashboard/projects')
   }
@@ -69,39 +70,54 @@ export default async function ProjectDetailPage({ params }: Props) {
   const balance = dbUser.wallet ? Number(dbUser.wallet.balance) : 0
   const latestMVP = project.aiRuns.find((run) => run.kind === 'mvp')
   const hasMVP = latestMVP?.status === 'completed'
+  const hasGeneratedCode = hasMVP && latestMVP?.generatedCode
 
   return (
     <div className="h-full">
       <DashboardHeader
         title={project.name}
-        description={project.repoFullName}
+        description={project.repoFullName || project.prompt || undefined}
         balance={balance}
       />
 
       <div className="p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* MVP Section */}
+        <div className="grid grid-cols-1 gap-8">
+          <div className="space-y-6">
             <div className="bg-white rounded-xl border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-900 mb-1">MVP Status</h2>
+                  <h2 className="text-xl font-semibold text-gray-900 mb-1 flex items-center">
+                    <Sparkles className="w-5 h-5 mr-2 text-blue-600" />
+                    {hasMVP ? 'Your Project is Ready!' : 'Project Generation'}
+                  </h2>
                   <p className="text-sm text-gray-600">
-                    {hasMVP ? 'Your MVP has been generated' : 'Generate your MVP to get started'}
+                    {hasMVP
+                      ? `Generated with ${project.aiModel} • ${latestMVP?.costCredits} credits used`
+                      : latestMVP?.status === 'running'
+                      ? 'AI is generating your project... This may take 1-3 minutes'
+                      : latestMVP?.status === 'queued'
+                      ? 'Your project is queued for generation...'
+                      : 'Start generating your project'
+                    }
                   </p>
                 </div>
-                {!hasMVP && <GenerateMVPButton projectId={project.id} />}
-              </div>
-
-              {latestMVP ? (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                    <div className="flex items-center">
+                <div className="flex items-center space-x-3">
+                  {latestMVP && (
+                    <div
+                      className={`flex items-center px-3 py-1.5 rounded-full text-sm font-medium ${
+                        latestMVP.status === 'completed'
+                          ? 'bg-green-100 text-green-700'
+                          : latestMVP.status === 'running'
+                          ? 'bg-blue-100 text-blue-700'
+                          : latestMVP.status === 'failed'
+                          ? 'bg-red-100 text-red-700'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
+                    >
                       <div
-                        className={`w-3 h-3 rounded-full mr-3 ${
+                        className={`w-2 h-2 rounded-full mr-2 ${
                           latestMVP.status === 'completed'
-                            ? 'bg-blue-500'
+                            ? 'bg-green-500'
                             : latestMVP.status === 'running'
                             ? 'bg-blue-500 animate-pulse'
                             : latestMVP.status === 'failed'
@@ -109,150 +125,141 @@ export default async function ProjectDetailPage({ params }: Props) {
                             : 'bg-gray-400'
                         }`}
                       />
-                      <div>
-                        <div className="font-medium text-gray-900 capitalize">
-                          {latestMVP.status}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {latestMVP.costCredits} credits used
-                        </div>
-                      </div>
+                      {latestMVP.status.replace('_', ' ')}
                     </div>
-                    {latestMVP.prUrl && (
+                  )}
+                  {hasMVP && hasGeneratedCode && latestMVP && (
+                    <DeployToVercelButton
+                      projectId={project.id}
+                      aiRunId={latestMVP.id}
+                      deploymentUrl={latestMVP.deploymentUrl}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {hasGeneratedCode && latestMVP?.generatedCode && (
+              <LivePreview
+                code={latestMVP.generatedCode}
+                projectId={project.id}
+                previewUrl={latestMVP.previewUrl}
+                sandboxId={latestMVP.sandboxId}
+              />
+            )}
+
+            {latestMVP && (latestMVP.status === 'running' || latestMVP.status === 'queued') && (
+              <div className="bg-white rounded-xl border border-gray-200 p-8">
+                <div className="flex flex-col items-center justify-center text-center">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <Sparkles className="w-8 h-8 text-blue-600 animate-pulse" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    AI is working on your project...
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    This usually takes 1-3 minutes. Feel free to refresh the page to check progress.
+                  </p>
+                  <div className="w-full max-w-xs bg-gray-200 rounded-full h-2">
+                    <div className="bg-blue-600 h-2 rounded-full animate-pulse w-3/5"></div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {!latestMVP && (
+              <div className="bg-white rounded-xl border border-gray-200 p-8">
+                <div className="text-center">
+                  <Zap className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Ready to generate your project?
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    Click the button below to start AI generation
+                  </p>
+                  <GenerateMVPButton projectId={project.id} />
+                </div>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="bg-white rounded-xl border border-gray-200 p-6">
+                <h3 className="font-semibold text-gray-900 mb-4">Project Info</h3>
+                <div className="space-y-3">
+                  <div>
+                    <div className="text-sm text-gray-600 mb-1">AI Model</div>
+                    <div className="text-sm font-medium text-gray-900">{project.aiModel}</div>
+                  </div>
+                  {project.repoFullName && (
+                    <div>
+                      <div className="text-sm text-gray-600 mb-1">Repository</div>
                       <a
-                        href={latestMVP.prUrl}
+                        href={`https://github.com/${project.repoFullName}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center text-sm text-blue-600 hover:text-blue-700"
                       >
-                        View PR
-                        <ExternalLink className="w-4 h-4 ml-1" />
+                        <GitBranch className="w-4 h-4 mr-1" />
+                        {project.repoFullName}
                       </a>
+                    </div>
+                  )}
+                  {project.prompt && (
+                    <div>
+                      <div className="text-sm text-gray-600 mb-1">Prompt</div>
+                      <div className="text-sm text-gray-900 line-clamp-3">{project.prompt}</div>
+                    </div>
+                  )}
+                  <div>
+                    <div className="text-sm text-gray-600 mb-1">Created</div>
+                    <div className="text-sm text-gray-900">
+                      {new Date(project.createdAt).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {latestMVP && (
+                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">Generation Stats</h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Status</span>
+                      <span className="text-sm font-semibold text-gray-900 capitalize">
+                        {latestMVP.status.replace('_', ' ')}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Credits Used</span>
+                      <span className="text-sm font-semibold text-blue-600">
+                        {latestMVP.costCredits}
+                      </span>
+                    </div>
+                    {latestMVP.deploymentUrl && (
+                      <div className="pt-3 border-t">
+                        <a
+                          href={latestMVP.deploymentUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-sm text-blue-600 hover:text-blue-700"
+                        >
+                          <ExternalLink className="w-4 h-4 mr-1" />
+                          View Deployment
+                        </a>
+                      </div>
                     )}
                   </div>
-
-                  {latestMVP.previewUrl && (
-                    <a
-                      href={latestMVP.previewUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block p-4 bg-blue-50 border border-blue-200 rounded-lg hover:border-blue-300 transition"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <Zap className="w-5 h-5 text-blue-600 mr-3" />
-                          <div>
-                            <div className="font-medium text-blue-900">Live Preview</div>
-                            <div className="text-sm text-blue-600">
-                              Click to view your MVP
-                            </div>
-                          </div>
-                        </div>
-                        <ExternalLink className="w-5 h-5 text-blue-600" />
-                      </div>
-                    </a>
-                  )}
-                </div>
-              ) : (
-                <div className="p-8 text-center border-2 border-dashed border-gray-300 rounded-lg">
-                  <Zap className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">
-                    No MVP generated yet. Click "Generate MVP" to create your first version.
-                  </p>
                 </div>
               )}
-            </div>
 
-            {/* Tasks Section */}
-            <div className="bg-white rounded-xl border border-gray-200">
-              <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-900 mb-1">Tasks</h2>
-                  <p className="text-sm text-gray-600">
-                    {project.tasks.length} total tasks
-                  </p>
-                </div>
-                <CreateTaskDialog projectId={project.id} />
-              </div>
-
-              <TaskList tasks={project.tasks} />
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Project Info */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6">
-              <h3 className="font-semibold text-gray-900 mb-4">Project Info</h3>
-              <div className="space-y-3">
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">Repository</div>
-                  <a
-                    href={`https://github.com/${project.repoFullName}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-sm text-blue-600 hover:text-blue-700"
-                  >
-                    <GitBranch className="w-4 h-4 mr-1" />
-                    {project.repoFullName}
-                  </a>
-                </div>
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">Status</div>
-                  <span
-                    className={`inline-flex px-2.5 py-1 rounded-full text-xs font-medium ${
-                      project.status === 'active'
-                        ? 'bg-blue-100 text-blue-700'
-                        : project.status === 'mvp_preview'
-                        ? 'bg-blue-100 text-blue-700'
-                        : 'bg-gray-100 text-gray-700'
-                    }`}
-                  >
-                    {project.status.replace('_', ' ')}
-                  </span>
-                </div>
-                <div>
-                  <div className="text-sm text-gray-600 mb-1">Created</div>
-                  <div className="text-sm text-gray-900">
-                    {new Date(project.createdAt).toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric',
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Task Stats */}
-            <div className="bg-white rounded-xl border border-gray-200 p-6">
-              <h3 className="font-semibold text-gray-900 mb-4">Task Stats</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Open</span>
-                  <span className="font-semibold text-gray-900">
-                    {project.tasks.filter((t) => t.status === 'open').length}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">In Progress</span>
-                  <span className="font-semibold text-blue-600">
-                    {project.tasks.filter((t) => t.status === 'in_progress' || t.status === 'assigned').length}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Completed</span>
-                  <span className="font-semibold text-blue-600">
-                    {project.tasks.filter((t) => t.status === 'done').length}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Canceled</span>
-                  <span className="font-semibold text-gray-600">
-                    {project.tasks.filter((t) => t.status === 'canceled').length}
-                  </span>
-                </div>
-              </div>
+              <QuickActions
+                projectName={project.name}
+                generatedCode={latestMVP?.generatedCode}
+              />
             </div>
           </div>
         </div>

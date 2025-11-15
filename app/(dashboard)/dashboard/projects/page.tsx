@@ -1,4 +1,4 @@
-import { requireUser } from '@/lib/supabase/server'
+import { auth } from '@/auth'
 import { prisma } from 'db'
 import { redirect } from 'next/navigation'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
@@ -7,12 +7,14 @@ import { Plus, FolderKanban, GitBranch, Clock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export default async function ProjectsPage() {
-  const user = await requireUser().catch(() => {
+  const session = await auth()
+
+  if (!session?.user?.email) {
     redirect('/login')
-  })
+  }
 
   const dbUser = await prisma.user.findUnique({
-    where: { email: user.email! },
+    where: { email: session.user.email },
     include: {
       wallet: true,
       projects: {
@@ -55,12 +57,12 @@ export default async function ProjectsPage() {
             <p className="text-gray-600 mb-6">
               Create your first project and generate an MVP to get started
             </p>
-            <Button asChild size="large">
-              <Link href="/dashboard/projects/new">
+            <Link href="/dashboard/projects/new">
+              <Button size="large" type="button">
                 <Plus className="w-5 h-5 mr-2" />
                 Create Your First Project
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">

@@ -37,11 +37,11 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Create wallet for the user with 100 free credits
+    // Create wallet for the user with 50 free credits
     await prisma.wallet.create({
       data: {
         userId: user.id,
-        balance: BigInt(100),
+        balance: BigInt(50),
         currency: 'CREDITS',
       },
     })
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     await prisma.creditGrant.create({
       data: {
         userId: user.id,
-        amount: BigInt(100),
+        amount: BigInt(50),
         source: 'signup_bonus',
       },
     })
@@ -59,8 +59,8 @@ export async function POST(request: NextRequest) {
     await prisma.creditLedger.create({
       data: {
         userId: user.id,
-        delta: BigInt(100),
-        reason: 'Sign up bonus - 100 free credits',
+        delta: BigInt(50),
+        reason: 'Sign up bonus - 50 free credits',
       },
     })
 

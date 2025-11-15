@@ -285,7 +285,6 @@ function AISandboxPage() {
     return () => {
       isMounted = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Run only on mount
   
   useEffect(() => {
@@ -313,7 +312,7 @@ function AISandboxPage() {
       }
       captureUrlScreenshot(screenshotUrl);
     }
-  }, [showHomeScreen, homeUrlInput]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [showHomeScreen, homeUrlInput]);
 
   // Auto-start generation if flagged
   useEffect(() => {
@@ -326,7 +325,7 @@ function AISandboxPage() {
         startGeneration();
       }, 1000);
     }
-  }, [showHomeScreen, homeUrlInput]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [showHomeScreen, homeUrlInput]);
 
 
   useEffect(() => {
@@ -334,7 +333,7 @@ function AISandboxPage() {
     if (!sandboxData) {
       checkSandboxStatus();
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (chatMessagesRef.current) {
@@ -356,7 +355,6 @@ function AISandboxPage() {
       
       return () => clearTimeout(timer);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldAutoGenerate, homeUrlInput, showHomeScreen]);
 
   const updateStatus = (text: string, active: boolean) => {
@@ -1519,7 +1517,6 @@ Tip: I automatically detect and install npm packages from your code imports (lik
           <div className="relative w-full h-full bg-gray-900">
             {/* Screenshot as background when available */}
             {urlScreenshot && (
-              /* eslint-disable-next-line @next/next/no-img-element */
               <img 
                 src={urlScreenshot} 
                 alt="Website preview" 
@@ -3175,7 +3172,6 @@ Focus on the key sections and content, making it clean and modern.`;
                     <div key={idx} className="flex flex-col gap-3">
                       {/* Site info with favicon */}
                       <div className="flex items-center gap-4 text-sm">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img 
                           src={favicon} 
                           alt={siteName}
@@ -3206,7 +3202,6 @@ Focus on the key sections and content, making it clean and modern.`;
                             maxHeight: sidebarScrolled ? '0' : '200px'
                           }}
                         >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img 
                             src={screenshot}
                             alt={`${siteName} preview`}

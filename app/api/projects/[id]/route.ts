@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from 'db'
-import { requireUser } from '@/lib/supabase/server'
+import { auth } from '@/auth'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -18,7 +18,13 @@ type Params = {
  */
 export async function GET(request: NextRequest, { params }: Params) {
   try {
-    const user = await requireUser()
+    const session = await auth()
+
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const user = session.user
     const { id } = await params
 
     // Get user from database

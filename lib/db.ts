@@ -20,11 +20,12 @@ export type {
   CreditLedger,
   Notification,
   AIRun,
-  Wallet
+  Wallet,
+  ApiKey
 } from '@prisma/client'
 
 // Credit costs
-export const MVP_COST = 1000 // Cost in credits for generating an MVP
+export const MVP_COST = 25 // Cost in credits for generating an MVP
 
 // Calculate task cost based on type and complexity
 export function calculateTaskCost(type: string, complexity: string): number {

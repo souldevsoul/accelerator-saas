@@ -1,48 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import { prisma } from 'db'
+import { auth, signOut } from '@/auth'
+import { prisma } from '@/lib/db'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-
 export async function DELETE(request: NextRequest) {
   try {
-    const supabase = await createClient()
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
+    const session = await auth()
 
-    if (!user) {
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const dbUser = await prisma.user.findUnique({
-      where: { email: user.email! },
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
     })
 
-    if (!dbUser) {
+    if (!user) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 })
     }
 
     // Delete user and all related data (cascading deletes in Prisma schema)
+    // This will delete:
+    // - Projects and AI runs
+    // - Tasks
+    // - Wallet and credit history
+    // - Notifications
+    // - API keys
+    // - Sessions and accounts
     await prisma.user.delete({
-      where: { id: dbUser.id },
+      where: { id: user.id },
     })
 
-    // Delete from Supabase Auth
-    const { error } = await supabase.auth.admin.deleteUser(user.id)
-    if (error) {
-      console.error('Failed to delete from Supabase Auth:', error)
-      // Continue anyway since we've deleted from our database
-    }
+    // Sign out the user
+    await signOut({ redirect: false })
 
-    // Sign out
-    await supabase.auth.signOut()
-
-    return NextResponse.json({ success: true })
+    return NextResponse.json({
+      success: true,
+      message: 'Account deleted successfully'
+    })
   } catch (error: any) {
     console.error('Failed to delete account:', error)
-    return NextResponse.json({ error: error.message || 'Failed to delete account' }, { status: 500 })
+    return NextResponse.json(
+      { error: error.message || 'Failed to delete account' },
+      { status: 500 }
+    )
   }
 }

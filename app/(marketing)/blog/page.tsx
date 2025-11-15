@@ -107,7 +107,7 @@ export default function BlogPage() {
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
-                placeholder="your@email.com"
+                placeholder="support@nimbusdev.com"
                 className="flex-1 px-6 py-3 rounded-lg outline-none"
                 disabled
               />

@@ -89,11 +89,11 @@ export const brand = {
 
   // Contact Information
   contact: {
-    email: 'hello@nimbusdev.com',
+    email: 'support@nimbusdev.com',
     support: 'support@nimbusdev.com',
-    legal: 'legal@nimbusdev.com',
-    privacy: 'privacy@nimbusdev.com',
-    enterprise: 'enterprise@nimbusdev.com',
+    legal: 'support@nimbusdev.com',
+    privacy: 'support@nimbusdev.com',
+    enterprise: 'support@nimbusdev.com',
   },
 
   // Social Media (placeholders)

@@ -1,0 +1,250 @@
+/**
+ * Vercel Deployment Utilities
+ *
+ * This module provides functions to deploy projects to Vercel using their REST API.
+ * Requires VERCEL_TOKEN environment variable to be set.
+ */
+
+interface VercelDeploymentOptions {
+  name: string
+  files: Array<{
+    file: string
+    data: string
+  }>
+  projectSettings?: {
+    framework?: string
+    buildCommand?: string
+    outputDirectory?: string
+    installCommand?: string
+  }
+}
+
+interface VercelDeploymentResponse {
+  id: string
+  url: string
+  status: string
+  readyState: string
+  inspectorUrl: string
+}
+
+const VERCEL_TOKEN = process.env.VERCEL_TOKEN
+const VERCEL_TEAM_ID = process.env.VERCEL_TEAM_ID
+
+/**
+ * Check if Vercel is configured
+ */
+export function isVercelConfigured(): boolean {
+  return !!VERCEL_TOKEN
+}
+
+/**
+ * Deploy a project to Vercel
+ * @param options Deployment options including project name and files
+ * @returns Deployment response with URL and status
+ */
+export async function deployToVercel(
+  options: VercelDeploymentOptions
+): Promise<VercelDeploymentResponse> {
+  if (!VERCEL_TOKEN) {
+    throw new Error(
+      'Vercel token not configured. Please set VERCEL_TOKEN environment variable.'
+    )
+  }
+
+  const { name, files, projectSettings } = options
+
+  // Prepare deployment payload
+  const payload: any = {
+    name,
+    files,
+    projectSettings: {
+      framework: projectSettings?.framework || 'vite',
+      buildCommand: projectSettings?.buildCommand || 'npm run build',
+      outputDirectory: projectSettings?.outputDirectory || 'dist',
+      installCommand: projectSettings?.installCommand || 'npm install',
+    },
+    target: 'production',
+  }
+
+  // Add team ID if configured
+  const url = VERCEL_TEAM_ID
+    ? `https://api.vercel.com/v13/deployments?teamId=${VERCEL_TEAM_ID}`
+    : 'https://api.vercel.com/v13/deployments'
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${VERCEL_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(
+        `Vercel deployment failed: ${errorData.error?.message || response.statusText}`
+      )
+    }
+
+    const data = await response.json()
+
+    return {
+      id: data.id,
+      url: `https://${data.url}`,
+      status: data.status,
+      readyState: data.readyState,
+      inspectorUrl: data.inspectorUrl,
+    }
+  } catch (error: any) {
+    console.error('Vercel deployment error:', error)
+    throw new Error(`Failed to deploy to Vercel: ${error.message}`)
+  }
+}
+
+/**
+ * Get deployment status
+ * @param deploymentId Deployment ID from Vercel
+ * @returns Deployment status
+ */
+export async function getDeploymentStatus(
+  deploymentId: string
+): Promise<{ status: string; readyState: string; url: string }> {
+  if (!VERCEL_TOKEN) {
+    throw new Error('Vercel token not configured')
+  }
+
+  const url = VERCEL_TEAM_ID
+    ? `https://api.vercel.com/v13/deployments/${deploymentId}?teamId=${VERCEL_TEAM_ID}`
+    : `https://api.vercel.com/v13/deployments/${deploymentId}`
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${VERCEL_TOKEN}`,
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error(`Failed to get deployment status: ${response.statusText}`)
+    }
+
+    const data = await response.json()
+
+    return {
+      status: data.status,
+      readyState: data.readyState,
+      url: `https://${data.url}`,
+    }
+  } catch (error: any) {
+    console.error('Error getting deployment status:', error)
+    throw error
+  }
+}
+
+/**
+ * Generate a valid Vercel project name
+ * - Lowercase only
+ * - Max 100 characters
+ * - Only letters, digits, '.', '_', '-'
+ * - Cannot contain '---'
+ * - Adds random suffix for uniqueness
+ */
+function generateVercelProjectName(projectName: string): string {
+  // Convert to lowercase and remove invalid characters
+  let name = projectName
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]/g, '-') // Replace invalid chars with dash
+    .replace(/^[^a-z0-9]+/, '') // Remove leading invalid chars
+    .replace(/[^a-z0-9]+$/, '') // Remove trailing invalid chars
+    .replace(/-+/g, '-') // Replace multiple dashes with single dash
+    .replace(/\.+/g, '.') // Replace multiple dots with single dot
+    .replace(/_{2,}/g, '_') // Replace multiple underscores with single underscore
+
+  // Ensure name doesn't start or end with special chars
+  name = name.replace(/^[._-]+|[._-]+$/g, '')
+
+  // If name is empty, use default
+  if (!name) {
+    name = 'project'
+  }
+
+  // Add random suffix for uniqueness (6 characters)
+  const randomSuffix = Math.random().toString(36).substring(2, 8)
+
+  // Combine and ensure max length
+  const fullName = `${name}-${randomSuffix}`
+
+  // Truncate to 100 chars if needed
+  return fullName.length > 100 ? fullName.substring(0, 100) : fullName
+}
+
+/**
+ * Parse generated code into Vercel deployment files
+ * @param generatedCode The code generated by AI
+ * @param projectName Project name for the deployment
+ * @returns Files array for Vercel deployment
+ */
+export function parseCodeToVercelFiles(
+  generatedCode: string,
+  projectName: string
+): VercelDeploymentOptions {
+  // Try to parse the generated code
+  // Assuming the code is in a structured format with file paths and content
+  const files: Array<{ file: string; data: string }> = []
+
+  try {
+    // Check if the code is JSON (structured format)
+    const parsedCode = JSON.parse(generatedCode)
+
+    if (parsedCode.files && Array.isArray(parsedCode.files)) {
+      // Format: { files: [{ path: string, content: string }] }
+      for (const file of parsedCode.files) {
+        files.push({
+          file: file.path || file.file,
+          data: file.content || file.data,
+        })
+      }
+    }
+  } catch {
+    // If not JSON, treat as a single file (index.html)
+    files.push({
+      file: 'index.html',
+      data: generatedCode,
+    })
+  }
+
+  // Generate valid Vercel project name
+  const vercelProjectName = generateVercelProjectName(projectName)
+
+  // Ensure we have at least package.json for build configuration
+  const hasPackageJson = files.some(f => f.file === 'package.json')
+  if (!hasPackageJson) {
+    files.push({
+      file: 'package.json',
+      data: JSON.stringify({
+        name: vercelProjectName,
+        version: '1.0.0',
+        scripts: {
+          dev: 'vite',
+          build: 'vite build',
+          preview: 'vite preview',
+        },
+        dependencies: {
+          react: '^18.2.0',
+          'react-dom': '^18.2.0',
+        },
+        devDependencies: {
+          '@vitejs/plugin-react': '^4.0.0',
+          vite: '^4.3.9',
+        },
+      }, null, 2),
+    })
+  }
+
+  return {
+    name: vercelProjectName,
+    files,
+  }
+}

@@ -7,7 +7,7 @@ export class VercelProvider extends SandboxProvider {
 
   async createSandbox(): Promise<SandboxInfo> {
     try {
-      
+
       // Kill existing sandbox if any
       if (this.sandbox) {
         try {
@@ -17,12 +17,12 @@ export class VercelProvider extends SandboxProvider {
         }
         this.sandbox = null;
       }
-      
+
       // Clear existing files tracking
       this.existingFiles.clear();
 
       // Create Vercel sandbox
-      
+
       const sandboxConfig: any = {
         timeout: 300000, // 5 minutes in ms
         runtime: 'node22', // Use node22 runtime for Vercel sandboxes
@@ -39,10 +39,10 @@ export class VercelProvider extends SandboxProvider {
       }
 
       this.sandbox = await Sandbox.create(sandboxConfig);
-      
+
       const sandboxId = this.sandbox.sandboxId;
       // Sandbox created successfully
-      
+
       // Get the sandbox URL using the correct Vercel Sandbox API
       const sandboxUrl = this.sandbox.domain(5173);
 
@@ -57,6 +57,52 @@ export class VercelProvider extends SandboxProvider {
 
     } catch (error) {
       console.error('[VercelProvider] Error creating sandbox:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Reconnect to an existing Vercel Sandbox
+   */
+  async reconnect(sandboxId: string, previewUrl?: string): Promise<SandboxInfo> {
+    try {
+      console.log(`[VercelProvider] Reconnecting to sandbox ${sandboxId}...`)
+
+      // Vercel Sandbox API doesn't support direct reconnection by ID
+      // But we can create a reference using the sandboxId if available
+      // For now, we'll create a mock sandbox object that can still execute commands
+
+      const sandboxConfig: any = {
+        sandboxId, // Try to use existing sandbox ID
+        timeout: 300000,
+        runtime: 'node22',
+        ports: [5173]
+      };
+
+      // Add authentication
+      if (process.env.VERCEL_TOKEN && process.env.VERCEL_TEAM_ID && process.env.VERCEL_PROJECT_ID) {
+        sandboxConfig.teamId = process.env.VERCEL_TEAM_ID;
+        sandboxConfig.projectId = process.env.VERCEL_PROJECT_ID;
+        sandboxConfig.token = process.env.VERCEL_TOKEN;
+      } else if (process.env.VERCEL_OIDC_TOKEN) {
+        sandboxConfig.oidcToken = process.env.VERCEL_OIDC_TOKEN;
+      }
+
+      // Try to connect to existing sandbox
+      this.sandbox = await Sandbox.create(sandboxConfig);
+
+      this.sandboxInfo = {
+        sandboxId,
+        url: previewUrl || this.sandbox.domain(5173),
+        provider: 'vercel',
+        createdAt: new Date()
+      };
+
+      console.log(`[VercelProvider] Successfully reconnected to sandbox ${sandboxId}`)
+      return this.sandboxInfo;
+
+    } catch (error) {
+      console.error(`[VercelProvider] Error reconnecting to sandbox ${sandboxId}:`, error);
       throw error;
     }
   }
@@ -128,19 +174,20 @@ export class VercelProvider extends SandboxProvider {
 
     // Vercel sandbox default working directory is /vercel/sandbox
     const fullPath = path.startsWith('/') ? path : `/vercel/sandbox/${path}`;
-    
-    // Writing file to sandbox
+
+    console.log(`[VercelProvider] Writing file: ${fullPath} (${content.length} bytes)`)
     
     // Based on Vercel SDK docs, writeFiles expects path and Buffer content
     try {
       const buffer = Buffer.from(content, 'utf-8');
       // Writing file with buffer
-      
+
       await this.sandbox.writeFiles([{
         path: fullPath,
         content: buffer
       }]);
-      
+
+      console.log(`[VercelProvider] ✓ File written successfully: ${fullPath}`)
       this.existingFiles.add(path);
     } catch (writeError: any) {
       // Log detailed error information
@@ -237,30 +284,109 @@ export class VercelProvider extends SandboxProvider {
       throw new Error('No active sandbox');
     }
 
-    const result = await this.sandbox.runCommand({
-      cmd: 'sh',
-      args: ['-c', `find ${directory} -type f -not -path "*/node_modules/*" -not -path "*/.git/*" -not -path "*/.next/*" -not -path "*/dist/*" -not -path "*/build/*" | sed "s|^${directory}/||"`],
-      cwd: '/'
-    });
-    
-    // Handle stdout - it might be a function in Vercel SDK
-    let stdout = '';
-    
     try {
-      if (typeof result.stdout === 'function') {
-        stdout = await result.stdout();
-      } else {
-        stdout = result.stdout || '';
+      // Try multiple approaches to get file listing
+      console.log('[VercelProvider] Attempting to list files in:', directory)
+
+      // Approach 1: Try ls -R which is more reliable with Vercel SDK
+      const result = await this.sandbox.runCommand({
+        cmd: 'ls',
+        args: ['-R', directory],
+        cwd: '/'
+      });
+
+      console.log('[VercelProvider] ls -R exitCode:', result.exitCode)
+
+      // Handle stdout - it might be a function in Vercel SDK
+      let stdout = '';
+
+      try {
+        if (typeof result.stdout === 'function') {
+          stdout = await result.stdout();
+        } else {
+          stdout = result.stdout || '';
+        }
+      } catch (e) {
+        console.error('[VercelProvider] Error reading stdout:', e)
+        stdout = '';
       }
-    } catch (e) {
-      stdout = '';
+
+      console.log('[VercelProvider] ls command stdout length:', stdout.length)
+      console.log('[VercelProvider] ls command stdout preview:', stdout.substring(0, 500))
+
+      if (result.exitCode !== 0 || !stdout) {
+        console.log('[VercelProvider] ls failed or empty, trying fallback')
+        return [];
+      }
+
+      // Parse ls -R output
+      const files: string[] = [];
+      let currentDir = '';
+
+      for (const line of stdout.split('\n')) {
+        const trimmed = line.trim();
+
+        // Skip empty lines
+        if (!trimmed) continue;
+
+        // Directory headers end with ':'
+        if (trimmed.endsWith(':')) {
+          currentDir = trimmed.slice(0, -1);
+          // Remove the base directory prefix
+          if (currentDir.startsWith(directory)) {
+            currentDir = currentDir.substring(directory.length);
+            if (currentDir.startsWith('/')) {
+              currentDir = currentDir.substring(1);
+            }
+          }
+          continue;
+        }
+
+        // Skip node_modules, .git, and other unwanted directories/files
+        if (trimmed.includes('node_modules') ||
+            trimmed.includes('.git') ||
+            trimmed === 'total' ||
+            trimmed.match(/^total \d+$/)) {
+          continue;
+        }
+
+        // Skip directory entries from ls -l format
+        if (trimmed.match(/^[d-][rwx-]{9}/)) {
+          continue;
+        }
+
+        // This is a file name
+        const filePath = currentDir ? `${currentDir}/${trimmed}` : trimmed;
+
+        // Filter out common non-source files and directories
+        if (!filePath.includes('node_modules/') &&
+            !filePath.includes('.git/') &&
+            !filePath.startsWith('.')) {
+          files.push(filePath);
+        }
+      }
+
+      console.log('[VercelProvider] Parsed files count:', files.length)
+      console.log('[VercelProvider] Sample files:', files.slice(0, 10))
+      return files;
+    } catch (error: any) {
+      // Check if sandbox has stopped (410 error)
+      const isSandboxStopped =
+        error?.response?.status === 410 ||
+        error?.text?.includes('sandbox_stopped') ||
+        error?.message?.includes('Status code 410') ||
+        (typeof error?.text === 'string' && JSON.parse(error.text || '{}')?.error?.code === 'sandbox_stopped')
+
+      if (isSandboxStopped) {
+        console.log('[VercelProvider] Sandbox has stopped, marking as inactive');
+        this.sandbox = null;
+        this.sandboxInfo = null;
+        throw new Error('Sandbox has stopped and is no longer available');
+      }
+
+      // Re-throw other errors
+      throw error;
     }
-    
-    if (result.exitCode !== 0) {
-      return [];
-    }
-    
-    return stdout.split('\n').filter((line: string) => line.trim() !== '');
   }
 
   async installPackages(packages: string[]): Promise<CommandResult> {
@@ -542,6 +668,20 @@ body {
     this.existingFiles.add('vite.config.js');
     this.existingFiles.add('tailwind.config.js');
     this.existingFiles.add('postcss.config.js');
+
+    // Verify files were created
+    console.log('[VercelProvider] Setup complete. Listing files...')
+    try {
+      const verifyResult = await this.sandbox.runCommand({
+        cmd: 'ls',
+        args: ['-la', '/vercel/sandbox'],
+        cwd: '/'
+      });
+      const stdout = typeof verifyResult.stdout === 'function' ? await verifyResult.stdout() : verifyResult.stdout;
+      console.log('[VercelProvider] Files in /vercel/sandbox:', stdout);
+    } catch (e) {
+      console.error('[VercelProvider] Failed to verify files:', e);
+    }
   }
 
   async restartViteServer(): Promise<void> {

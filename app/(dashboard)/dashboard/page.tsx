@@ -1,4 +1,4 @@
-import { requireUser } from '@/lib/supabase/server'
+import { auth } from '@/auth'
 import { prisma } from 'db'
 import { redirect } from 'next/navigation'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
@@ -7,13 +7,15 @@ import { Button } from '@/components/ui/button'
 import { Plus, FolderKanban, CheckCircle2, Clock, AlertCircle } from 'lucide-react'
 
 export default async function DashboardPage() {
-  const user = await requireUser().catch(() => {
+  const session = await auth()
+
+  if (!session?.user?.email) {
     redirect('/login')
-  })
+  }
 
   // Get or create user in database
   let dbUser = await prisma.user.findUnique({
-    where: { email: user.email! },
+    where: { email: session.user.email },
     include: {
       wallet: true,
       projects: {
@@ -33,8 +35,8 @@ export default async function DashboardPage() {
   if (!dbUser) {
     dbUser = await prisma.user.create({
       data: {
-        email: user.email!,
-        name: user.user_metadata?.full_name || user.email!.split('@')[0],
+        email: session.user.email,
+        name: session.user.name || session.user.email.split('@')[0],
         wallet: {
           create: {
             balance: 100, // Welcome bonus
@@ -124,9 +126,9 @@ export default async function DashboardPage() {
         <div className="bg-white rounded-xl border border-gray-200">
           <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-900">Recent Projects</h2>
-            <Button variant="outline" size="small" asChild>
-              <Link href="/dashboard/projects">View All</Link>
-            </Button>
+            <Link href="/dashboard/projects">
+              <Button variant="outline" size="small" type="button">View All</Button>
+            </Link>
           </div>
 
           {dbUser.projects.length === 0 ? (
@@ -136,12 +138,12 @@ export default async function DashboardPage() {
               <p className="text-gray-600 mb-6">
                 Create your first project to get started
               </p>
-              <Button asChild>
-                <Link href="/dashboard/projects/new">
+              <Link href="/dashboard/projects/new">
+                <Button type="button">
                   <Plus className="w-5 h-5 mr-2" />
                   Create Project
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
           ) : (
             <div className="divide-y divide-gray-200">

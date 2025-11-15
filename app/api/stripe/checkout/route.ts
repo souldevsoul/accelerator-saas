@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { requireUser } from '@/lib/supabase/server'
+import { auth } from '@/auth'
 import { createCheckoutSession, type CreditPackageKey } from 'lib'
 import { prisma } from 'db'
 
@@ -13,9 +13,16 @@ export const revalidate = 0
  */
 export async function POST(request: NextRequest) {
   try {
-    const user = await requireUser()
-    const body = await request.json()
+    const session = await auth()
 
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
+
+    const body = await request.json()
     const { packageKey } = body
 
     if (!packageKey) {
@@ -36,14 +43,14 @@ export async function POST(request: NextRequest) {
 
     // Get or create user in database
     let dbUser = await prisma.user.findUnique({
-      where: { email: user.email! },
+      where: { email: session.user.email },
     })
 
     if (!dbUser) {
       dbUser = await prisma.user.create({
         data: {
-          email: user.email!,
-          name: user.user_metadata?.full_name || user.email!.split('@')[0],
+          email: session.user.email,
+          name: session.user.name || session.user.email.split('@')[0],
         },
       })
 

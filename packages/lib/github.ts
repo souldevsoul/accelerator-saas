@@ -1,19 +1,27 @@
 import { App } from '@octokit/app'
 import { Octokit } from '@octokit/rest'
 
-if (!process.env.GITHUB_APP_ID || !process.env.GITHUB_PRIVATE_KEY) {
-  throw new Error('Missing GitHub App credentials')
-}
+const GITHUB_ENABLED = !!(process.env.GITHUB_APP_ID && process.env.GITHUB_PRIVATE_KEY)
 
-const app = new App({
-  appId: process.env.GITHUB_APP_ID,
-  privateKey: process.env.GITHUB_PRIVATE_KEY.replace(/\\n/g, '\n'),
-})
+const app = GITHUB_ENABLED
+  ? new App({
+      appId: process.env.GITHUB_APP_ID!,
+      privateKey: process.env.GITHUB_PRIVATE_KEY!.replace(/\\n/g, '\n'),
+    })
+  : null
+
+export function isGitHubConfigured(): boolean {
+  return GITHUB_ENABLED
+}
 
 /**
  * Get authenticated Octokit instance for the installation
  */
 export async function getOctokit(): Promise<Octokit> {
+  if (!GITHUB_ENABLED || !app) {
+    throw new Error('GitHub App is not configured')
+  }
+
   if (!process.env.GITHUB_INSTALLATION_ID) {
     throw new Error('Missing GitHub installation ID')
   }

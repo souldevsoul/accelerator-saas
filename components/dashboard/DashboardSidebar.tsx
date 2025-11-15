@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { brand } from '@/lib/brand'
 import {
   LayoutDashboard,
   FolderKanban,
@@ -83,10 +84,10 @@ export function DashboardSidebar({ userRole }: { userRole?: string }) {
       {/* Logo */}
       <div className="px-6 py-5 border-b border-gray-200">
         <Link href="/dashboard" className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">A</span>
+          <div className="w-8 h-8 bg-gradient-to-br from-sky-600 to-blue-700 rounded-lg flex items-center justify-center">
+            <span className="text-white font-bold text-lg">N</span>
           </div>
-          <span className="text-xl font-bold text-gray-900">Accelerator</span>
+          <span className="text-xl font-bold text-gray-900">{brand.name}</span>
         </Link>
       </div>
 

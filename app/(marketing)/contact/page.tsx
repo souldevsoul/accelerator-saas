@@ -65,8 +65,8 @@ export default function ContactPage() {
               {
                 icon: Building2,
                 title: 'Enterprise',
-                description: 'enterprise@nimbusdev.com',
-                action: 'mailto:enterprise@nimbusdev.com'
+                description: 'support@nimbusdev.com',
+                action: 'mailto:support@nimbusdev.com'
               }
             ].map((option, index) => (
               <a
@@ -115,7 +115,7 @@ export default function ContactPage() {
                       type="email"
                       id="email"
                       className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition"
-                      placeholder="your@email.com"
+                      placeholder="you@example.com"
                       disabled
                     />
                   </div>

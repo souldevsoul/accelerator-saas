@@ -1,53 +1,57 @@
 import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { auth } from '@/auth'
 import { prisma } from 'db'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import { CreditPackages } from '@/components/wallet/CreditPackages'
 import { TransactionHistory } from '@/components/wallet/TransactionHistory'
+import { TestAddCredits } from '@/components/wallet/TestAddCredits'
 import { Wallet as WalletIcon, TrendingUp, TrendingDown, Clock } from 'lucide-react'
 
 // Force dynamic rendering to avoid DB access during build
 export const dynamic = 'force-dynamic'
 
 export default async function WalletPage() {
-  const supabase = await createClient()
+  const session = await auth()
 
-  // Beta: Skip auth check if Supabase not configured
-  let user = null
-  let dbUser = null
+  if (!session?.user?.email) {
+    redirect('/login')
+  }
 
-  if (supabase) {
-    const { data } = await supabase.auth.getUser()
-    user = data.user
+  // Get user from database
+  const dbUser = await prisma.user.findUnique({
+    where: { email: session.user.email },
+    include: {
+      wallet: true,
+    },
+  })
 
-    if (!user) {
-      redirect('/login')
-    }
+  if (!dbUser) {
+    redirect('/login')
+  }
 
-    dbUser = await prisma.user.findUnique({
-      where: { email: user.email! },
+  // Create wallet if it doesn't exist
+  if (!dbUser.wallet) {
+    await prisma.wallet.create({
+      data: {
+        userId: dbUser.id,
+        balance: BigInt(0),
+        currency: 'CREDITS',
+      },
+    })
+
+    // Reload user with wallet
+    const updatedUser = await prisma.user.findUnique({
+      where: { id: dbUser.id },
       include: {
         wallet: true,
       },
     })
 
-    if (!dbUser || !dbUser.wallet) {
-      redirect('/login')
+    if (!updatedUser?.wallet) {
+      throw new Error('Failed to create wallet')
     }
-  } else {
-    // For beta without auth, show message
-    return (
-      <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-lg shadow p-8 text-center">
-            <h1 className="text-2xl font-bold mb-4">Authentication Required</h1>
-            <p className="text-gray-600">
-              Wallet page requires authentication. We're currently in beta mode.
-            </p>
-          </div>
-        </div>
-      </div>
-    )
+
+    dbUser.wallet = updatedUser.wallet
   }
 
   // Get transaction history
@@ -121,6 +125,9 @@ export default async function WalletPage() {
             </div>
           </div>
         </div>
+
+        {/* Test Tools (Development Only) */}
+        <TestAddCredits />
 
         {/* Buy Credits Section */}
         <div className="mb-8">

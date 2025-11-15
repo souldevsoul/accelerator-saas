@@ -107,6 +107,18 @@ class SandboxManager {
   }
 
   /**
+   * Remove a sandbox from manager without terminating it
+   * Useful when sandbox has already stopped or is no longer accessible
+   */
+  removeSandbox(sandboxId: string): void {
+    this.sandboxes.delete(sandboxId);
+
+    if (this.activeSandboxId === sandboxId) {
+      this.activeSandboxId = null;
+    }
+  }
+
+  /**
    * Terminate a sandbox
    */
   async terminateSandbox(sandboxId: string): Promise<void> {
@@ -118,7 +130,7 @@ class SandboxManager {
         console.error(`[SandboxManager] Error terminating sandbox ${sandboxId}:`, error);
       }
       this.sandboxes.delete(sandboxId);
-      
+
       if (this.activeSandboxId === sandboxId) {
         this.activeSandboxId = null;
       }

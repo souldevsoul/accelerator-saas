@@ -1,5 +1,5 @@
 import { DashboardSidebar } from '@/components/dashboard/DashboardSidebar'
-import { requireUser } from '@/lib/supabase/server'
+import { auth } from '@/auth'
 import { prisma } from 'db'
 import { redirect } from 'next/navigation'
 
@@ -8,13 +8,15 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  const user = await requireUser().catch(() => {
+  const session = await auth()
+
+  if (!session?.user?.email) {
     redirect('/login')
-  })
+  }
 
   // Get user from database
   const dbUser = await prisma.user.findUnique({
-    where: { email: user.email! },
+    where: { email: session.user.email },
   })
 
   return (
