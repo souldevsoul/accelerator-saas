@@ -15,7 +15,7 @@ export default function Logocloud() {
         <div className="text-body-large text-accent-black">
           Trusted by{" "}
           <span className="contents text-label-large text-heat-100">
-            5000+ <br /> companies
+            developers worldwide <br /> building great products
           </span>{" "}
           of all sizes
         </div>

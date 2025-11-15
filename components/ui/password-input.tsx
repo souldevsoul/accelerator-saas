@@ -89,7 +89,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(({
   const toggleButton = showToggle ? (
     <button
       type="button"
-      className="text-gray-500 hover:text-sky-600 focus:outline-none focus:text-sky-600 transition-colors duration-200"
+      className="text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 transition-colors duration-200"
       onClick={togglePasswordVisibility}
       aria-label={showPassword ? 'Hide password' : 'Show password'}
     >

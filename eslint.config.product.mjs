@@ -7,12 +7,23 @@ import productQuality from './eslint-plugin-product-quality/index.js';
  * Flat config format (ESLint 9+) with TypeScript support
  *
  * Enforces Nimbus brand standards:
- * - Blue/Sky/Cyan color palette only
- * - Company name: Nimbus
- * - Email: support@nimbusdev.com
+ * - blue/sky/cyan color palette (clean professional theme)
+ * - Company name: Nimbus (Title Case)
+ * - Email: support@nimbusdev.com (single contact point)
  * - Payment provider: stripe
  */
 export default [
+  {
+    ignores: [
+      '.next/**',
+      'node_modules/**',
+      'out/**',
+      'build/**',
+      '*.config.js',
+      '*.config.ts',
+      'eslint-plugin-product-quality/**',
+    ],
+  },
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
@@ -30,64 +41,79 @@ export default [
     },
     rules: {
       // ========================================
-      // LINK VALIDATION (Critical for UX)
+      // PRODUCT QUALITY - CRITICAL
       // ========================================
-      'product-quality/no-broken-internal-links': 'warn',
 
-      // ========================================
-      // BRAND CONSISTENCY - NIMBUS ONLY
-      // ========================================
-      'product-quality/use-styleguide-colors-only': ['warn', {
-        allowedColors: [
-          // Base colors
-          'black',
-          'white',
-          'transparent',
-          'current',
-          'inherit',
-          // Grayscale (always allowed)
-          'gray-',
-          'slate-',
-          'zinc-',
-          'neutral-',
-          // Nimbus brand colors ONLY
-          'blue-',      // Primary brand color (#3b82f6, #2563eb, #1d4ed8)
-          'sky-',       // Secondary brand color (#0ea5e9, #0284c7)
-          'cyan-',      // Accent color
-          // Utility colors (allowed)
-          'red-',       // For errors
-        ],
-      }],
+      // Link validation - prevents 404 errors
+      'product-quality/no-broken-internal-links': 'error',
 
-      // ========================================
-      // CONTENT CONSISTENCY - NIMBUS
-      // ========================================
-      'product-quality/consistent-payment-providers': ['warn', {
-        provider: 'stripe',
-      }],
-      'product-quality/consistent-company-info': ['warn', {
+      // Brand consistency - ensures correct branding
+      'product-quality/consistent-company-info': ['error', {
         companyName: 'Nimbus',
         email: 'support@nimbusdev.com',
       }],
 
+      // Payment provider consistency
+      'product-quality/consistent-payment-providers': ['error', {
+        provider: 'stripe',
+      }],
+
+      // Color palette enforcement - brand visual consistency
+      'product-quality/use-styleguide-colors-only': ['error', {
+        allowedColors: [
+          // Base
+          'black', 'white', 'transparent', 'current', 'inherit',
+          // Neutrals
+          'slate-', 'gray-', 'zinc-', 'neutral-',
+          // Nimbus brand (blue/sky/cyan)
+          'blue-', 'sky-', 'cyan-',
+          // Semantic
+          'red-', // Errors only
+        ],
+      }],
+
       // ========================================
-      // UX CONSISTENCY RULES
+      // TEMPLATE ADAPTATION (CRITICAL)
       // ========================================
+      'product-quality/no-template-content': ['error', {
+        projectName: 'Nimbus',
+        forbiddenWords: [
+          // No old project names
+          'Accelerator', 'VoiceCraft', 'LogoSmith', 'Velocity', 'Aurora', 'Zenith',
+          // No features we don't have
+          'voice', 'Voice', 'audio', 'Audio',
+          'logo', 'Logo',
+        ],
+      }],
+
+      'product-quality/no-fake-statistics': 'error',
+
+      'product-quality/require-consistent-layout': ['warn', {
+        marketingPages: ['/', '/about', '/pricing', '/how-it-works', '/contact', '/experts', '/blog'],
+      }],
+
+      'product-quality/require-policy-content': ['warn', {
+        minimumLength: 500,
+      }],
+
+      'product-quality/require-auth-ui-in-dashboard': 'warn',
+
+      // ========================================
+      // UX & FUNCTIONALITY
+      // ========================================
+
+      // Interactive elements must be functional
       'product-quality/no-button-without-handler': 'warn',
       'product-quality/no-form-without-submit': 'error',
+
+      // Accessibility
       'product-quality/no-missing-alt-text': 'error',
+
+      // Content quality
       'product-quality/no-generic-placeholders': 'warn',
-      'product-quality/require-loading-state-on-async-button': 'warn',
-      'product-quality/require-aria-label-on-icon-buttons': 'warn',
 
       // ========================================
-      // ERROR HANDLING & QUALITY
-      // ========================================
-      'product-quality/require-try-catch-fetch': 'warn',
-      'product-quality/require-empty-state': 'warn',
-
-      // ========================================
-      // PERFORMANCE
+      // PERFORMANCE & OPTIMIZATION
       // ========================================
       'product-quality/require-image-optimization': 'warn',
     },

@@ -7,7 +7,7 @@ const FeatureHighlightSection: React.FC = () => {
         <div className="flex flex-wrap -mx-4">
           <div className="w-full md:w-1/2 lg:w-5/12 px-4 mb-20 lg:mb-0">
             <div className="max-w-xs mb-10">
-              <span className="inline-flex items-center h-6 mb-4 px-2 text-sm uppercase font-medium text-sky-700 bg-sky-200 rounded-full">Feature</span>
+              <span className="inline-flex items-center h-6 mb-4 px-2 text-sm uppercase font-medium text-blue-700 bg-blue-200 rounded-full">Feature</span>
               <h1 className="font-heading tracking-tight text-4xl sm:text-5xl font-bold mb-4">Easily organize your files</h1>
               <p className="text-gray-700 mb-10">Increase your marketing team efficiency with a quick search and ease of use features.</p>
               <ul>
@@ -61,7 +61,7 @@ const FeatureHighlightSection: React.FC = () => {
                 </li>
               </ul>
             </div>
-            <a className="xs:flex-shrink-0 group relative w-full xs:w-auto h-12 flex xs:inline-flex items-center justify-center px-5 font-bold text-gray-700 bg-white border border-gray-200 hover:border-sky-600 shadow-md hover:shadow-none rounded-lg transition-all duration-300 focus:outline-none" href="#">
+            <a className="xs:flex-shrink-0 group relative w-full xs:w-auto h-12 flex xs:inline-flex items-center justify-center px-5 font-bold text-gray-700 bg-white border border-gray-200 hover:border-blue-600 shadow-md hover:shadow-none rounded-lg transition-all duration-300 focus:outline-none" href="#">
               <div className="absolute top-0 left-0 w-full h-full rounded-lg ring ring-gray-100 animate-pulse group-hover:ring-0 transition duration-300"></div>
               <span className="mr-2">Learn more</span>
               <span className="transform group-hover:translate-x-1 transition duration-300">

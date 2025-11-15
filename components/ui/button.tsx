@@ -49,8 +49,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   // Style variants
   const variantClasses = {
     primary: 'text-white bg-gradient-to-br from-cyanGreen-800 to-cyan-800 hover:from-cyanGreen-900 hover:to-cyan-900 focus:ring-cyanGreen-500 rounded-lg',
-    secondary: 'text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 hover:border-sky-600 focus:ring-sky-500 shadow-sm hover:shadow-none rounded-lg',
-    outline: 'text-sky-700 bg-transparent border border-sky-600 hover:bg-sky-50 focus:ring-sky-500 rounded-lg',
+    secondary: 'text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 hover:border-blue-600 focus:ring-blue-500 shadow-sm hover:shadow-none rounded-lg',
+    outline: 'text-blue-700 bg-transparent border border-blue-600 hover:bg-blue-50 focus:ring-blue-500 rounded-lg',
     ghost: 'text-gray-700 bg-transparent hover:bg-gray-100 focus:ring-gray-500 rounded-lg',
     destructive: 'text-white bg-red-600 hover:bg-red-700 focus:ring-red-500 rounded-lg'
   };

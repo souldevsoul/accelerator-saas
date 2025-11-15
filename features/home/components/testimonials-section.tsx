@@ -18,7 +18,7 @@ const TestimonialsSection: React.FC = () => {
           <div className="max-w-7xl mx-auto">
             <div className="max-w-2xl mx-auto mb-20 text-center">
               <span className="inline-flex items-center h-6 mb-6 px-2 text-xs uppercase font-medium text-blue-700 bg-blue-200 rounded-full">TESTIMONIALS</span>
-              <h1 className="font-heading tracking-tight text-4xl sm:text-5xl font-bold">What Our Customers Say</h1>
+              <h1 className="font-heading tracking-tight text-4xl sm:text-5xl font-bold">Used by hundreds of companies and happy users</h1>
             </div>
             <div className="flex items-center justify-center">
               <div className="text-gray-500">Loading testimonials...</div>
@@ -35,7 +35,7 @@ const TestimonialsSection: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="max-w-2xl mx-auto mb-20 text-center">
             <span className="inline-flex items-center h-6 mb-6 px-2 text-xs uppercase font-medium text-blue-700 bg-blue-200 rounded-full">TESTIMONIALS</span>
-            <h1 className="font-heading tracking-tight text-4xl sm:text-5xl font-bold">What Our Customers Say</h1>
+            <h1 className="font-heading tracking-tight text-4xl sm:text-5xl font-bold">Used by hundreds of companies and happy users</h1>
           </div>
           <div className="flex flex-wrap -mx-4">
             {(testimonials as Testimonial[]).map((testimonial, index) => (
@@ -44,7 +44,7 @@ const TestimonialsSection: React.FC = () => {
                   <Image
                     className="block h-8 mb-8"
                     src={testimonial.logoSrc}
-                    alt="Company logo"
+                    alt="Company"
                     width={120}
                     height={32}
                   />

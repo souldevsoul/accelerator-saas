@@ -180,7 +180,7 @@ const Header = memo(() => {
                 {navigationItems.map((item) => (
                   <li key={item.to}>
                     <Link
-                      className={`inline-block text-lg font-medium transition duration-200 focus:outline-none focus:underline ${isActiveRoute(item.to) ? 'text-sky-700' : 'text-black hover:text-sky-700'}`}
+                      className={`inline-block text-lg font-medium transition duration-200 focus:outline-none focus:underline ${isActiveRoute(item.to) ? 'text-blue-700' : 'text-black hover:text-blue-700'}`}
                       href={item.to}
                       onClick={closeMobileMenu}
                       aria-current={isActiveRoute(item.to) ? 'page' : undefined}
@@ -202,7 +202,7 @@ const Header = memo(() => {
                 Login
               </Link>
               <Link
-                className="flex items-center justify-center h-10 px-4 text-center text-sm text-white font-semibold border border-sky-600 bg-sky-500 hover:bg-sky-600 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+                className="flex items-center justify-center h-10 px-4 text-center text-sm text-white font-semibold border border-blue-600 bg-blue-500 hover:bg-blue-600 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 href={getRouteByName('register')}
                 onClick={closeMobileMenu}
               >
